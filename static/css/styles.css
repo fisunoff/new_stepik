@@ -310,3 +310,34 @@ textarea {
     border-radius: 10px;
 }
 
+/* password form */
+.password-form .fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label-text {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    color: var(--blue-color);
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 18px;
+}
+
+input[type="password" i] {
+    background-color: var(--blue-color);
+    display: block;
+    width: 40%;
+    margin-top: 10px;
+    margin-right: 50px;
+    padding: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    color: #FFF;
+    border: none;
+    border-radius: 10px;
+}
