@@ -101,22 +101,24 @@ ul#slide-out:not(.browser-default) > li {
   }
 
 .header {
-    margin-top: 20px;
+    background-color: var(--white-color);
+    padding: 10px 0;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+    transition: all .2s ease;
+    margin-bottom: 60px;
 }
-
+.header.fixed {
+    position: fixed;
+    transform: translateY(100px);
+}
 .header__links {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 60px;
-    padding: 0 20px;
-}
-.header__logo {
-    width: 48px;
-    height: 48px;
-    text-decoration: none;
-    font-size: 31px;
-    letter-spacing: 4.65px;
 }
 .header-link__items {
     display: flex;
