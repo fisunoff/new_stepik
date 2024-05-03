@@ -1,0 +1,24 @@
+.well__hero {
+    background-color: var(--dark-color);
+    padding: 40px 20px;
+}
+.well__flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.well__name {
+
+}
+.well__title {
+    margin-bottom: 16px;
+    color: var(--light-color);
+}
+.well__subtitle {
+    color: #e7f5ff9e;
+    margin-bottom: 16px;
+}
+.certif__con {
+    display: flex;
+    align-items: center;
+}
