@@ -91,7 +91,7 @@ class Task(AuthoringModel):
 class Answer(AuthoringModel):
     status = models.CharField(max_length=127, choices=const.statuses, default=const.IN_PROGRESS)
     answer = models.TextField(verbose_name='Ответ', null=True, blank=False)
-    mark = models.IntegerField('Балл')
+    mark = models.IntegerField('Балл', default=0)
     task = models.ForeignKey(to=Task, null=False, on_delete=models.CASCADE)
     file = models.FileField(verbose_name="Прикрепленный файл", blank=True, null=True, upload_to='media/')
 
