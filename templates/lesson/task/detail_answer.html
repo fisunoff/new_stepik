@@ -29,8 +29,12 @@
         <div class="right-menu">
             <ol class="list-group">
                 {% for row in task.block.task_set.all %}
+                    {% if row.id == task.id %}
+                    <li class="list-group-item active-item">
+                    {% else %}
                     <li class="list-group-item">
-                        <a href=""> {{ row.name }} </a>
+                    {% endif %}
+                        <a href="{% url 'answer-create' from_pk=row.pk %}"> {{ row.name }} </a>
                     </li>
                 {% endfor %}
             </ol>
