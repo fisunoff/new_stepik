@@ -98,11 +98,11 @@ class Answer(AuthoringModel):
         return f'{self.answer} ({self.mark})'
 
     def auto_test(self):
-        if self.answer.lower() == self.task.name.lower():
+        if self.answer.lower() == self.task.correct_answer.lower():
             self.mark = self.task.max_mark
         else:
             self.mark = 0
-        status = const.DONE
+        self.status = const.DONE
 
     def evaluate_answer(self):
         # Получаем правильные ответы

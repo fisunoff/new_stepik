@@ -14,7 +14,7 @@ class AnswerForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
-        self.instance.profile = self.profile
+        self.instance.author = self.profile
         self.instance.task = self.task
         if self.task.autotest:
             self.instance.auto_test()
