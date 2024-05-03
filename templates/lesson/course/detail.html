@@ -7,20 +7,35 @@
                 <tr>
                     <th>Название</th>
                     <th>Сертификаты</th>
+                    <th>Регистрация</th>
+                    <th>Максимум баллов</th>
+                    {% if registered %}
+                    <th>Мои результаты</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>{{ object.name }}</td>
                     <td>{{ object.demands_str|linebreaks }}</td>
-
+                    <td>
+                        {% if registered %}
+                            Да
+                        {% else %}
+                            <a href="{% url 'course-register' object.id %}" >Зарегистрироваться</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ object.max_mark }}</td>
+                    {% if registered %}
+                        <th>{{ mark }} ({{ percent }}%)</th>
+                    {% endif %}
                 </tr>
             </tbody>
                     
         </table>
     </div>
 
-    
+
     
     {% load django_tables2 %}
     {% render_table table %}

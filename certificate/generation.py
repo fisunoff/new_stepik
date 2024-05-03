@@ -28,5 +28,5 @@ def gen_document(document_id):
 
     template.render(context)
     template.save(outpath)
-    document.set_document(path, 'Сертификат.docx')
+    document.set_document(outpath, 'Сертификат.docx')
     document.save()

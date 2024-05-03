@@ -35,6 +35,7 @@ class GeneratedDocument(AuthoringModel):
     last_operation_time = models.DateTimeField('Последнее изменение', blank=True, null=True)
     last_version = models.BooleanField('Последняя версия', default=True)
     warnings = models.TextField('Предупреждения', null=True, blank=True)
+    percent = models.IntegerField(verbose_name='Процент выполнения курса', null=True, blank=True)
 
     class Meta:
         verbose_name = "Документ"
