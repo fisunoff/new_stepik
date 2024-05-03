@@ -11,4 +11,5 @@ urlpatterns = [
     path('<int:pk>/delete/', CourseDeleteView.as_view(), name='course-delete'),
     path('<int:pk>/register/', CourseRegistrationView.as_view(), name='course-register'),
     path('task/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
+    path('answer/create/<int:from_pk>/', AnswerCreateView.as_view(), name='answer-create'),
 ]

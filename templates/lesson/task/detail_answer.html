@@ -3,15 +3,30 @@
     <div class="main-content">
         <div class="base">
             <div class="course-name">
-                {{ object.name }}
+                {{ task.name }}
             </div>
-            {{ object.description }}
-            <div>Кнопка</div>
+            <div>Максимальный балл - {{ task.max_mark }}</div>
+            <div>Лучшая попытка - {{ best_try }}</div>
+            {{ task.description|linebreaks }}
+            <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ title }}</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-success">
+                        Отправить ответ
+                    </button>
+                </form>
+            </div>
+        </div>
         </div>
 
         <div class="right-menu">
             <ol class="list-group">
-                {% for row in object.block.task_set.all %}
+                {% for row in task.block.task_set.all %}
                     <li class="list-group-item">
                         <a href=""> {{ row.name }} </a>
                     </li>

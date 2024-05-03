@@ -1,10 +1,11 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_tables2 import SingleTableView, SingleTableMixin
 
-from lesson.models import Course, Block, CourseRegister, Task
+from lesson.forms import AnswerForm
+from lesson.models import Course, Block, CourseRegister, Task, Answer
 from lesson.tables import CourseTable, BlockTable
 
 
@@ -127,4 +128,30 @@ class CourseRegistrationView(CreateView):
 
 class TaskDetailView(DetailView):
     model = Task
-    template_name = 'lesson/task/detail.html'
+    template_name = 'lesson/task/detail_answer.html'
+
+
+class AnswerCreateView(CreateView):
+    model = Answer
+    form_class = AnswerForm
+    template_name = 'lesson/task/detail_answer.html'
+    # template_name = 'base_create.html'
+
+    def get(self, request, from_pk, *args, **kwargs):
+        self.task = get_object_or_404(Task, pk=from_pk)
+        return super().get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('task-detail', kwargs={'pk': self.object.task.pk})
+
+    def get_context_data(self, **kwargs):
+        kwargs = super().get_context_data(**kwargs)
+        kwargs['task'] = self.task
+        kwargs['best_try'] = self.task.best_try(profile=self.request.user.profile)
+        return kwargs
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super().get_form_kwargs(**kwargs)
+        kwargs['task'] = self.task
+        kwargs['profile'] = self.request.user.profile
+        return kwargs

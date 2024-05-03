@@ -56,6 +56,12 @@ class Task(AuthoringModel):
     def __str__(self):
         return self.name
 
+    def best_try(self, profile):
+        trys = Answer.objects.filter(task=self, author=profile).order_by('-mark')
+        if trys.exists():
+            return trys.first().mark
+        return 0
+
 
 class Answer(AuthoringModel):
     status = models.CharField(max_length=127, choices=const.statuses, default=const.IN_PROGRESS)
@@ -66,6 +72,13 @@ class Answer(AuthoringModel):
 
     def __str__(self):
         return f'{self.answer} ({self.mark})'
+
+    def auto_test(self):
+        if self.answer.lower() == self.task.name.lower():
+            self.mark = self.task.max_mark
+        else:
+            self.mark = 0
+        status = const.DONE
 
 
 class CourseRegister(TimestampedModel):
