@@ -20,6 +20,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from extended_user.views import ProfileDetailView, SignUp
+from new_stepik import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +29,5 @@ urlpatterns = [
     path('accounts/profile/', ProfileDetailView.as_view(), name='self-profile-detail'),
     path('reg/', SignUp.as_view(), name='reg'),
     path('courses/', include('lesson.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+              + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'extended_user',
     'lesson',
+    'certificate',
 ]
 
 MIDDLEWARE = [

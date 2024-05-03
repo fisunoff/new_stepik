@@ -6,20 +6,20 @@
             <thead>
                 <tr>
                     <th>Название</th>
-                    <th>Единица измерения</th>
+                    <th>Сертификаты</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>{{ object.name }}</td>
-                    <td>{{ object.measure_type }}</td>
+                    <td>{{ object.demands_str|linebreaks }}</td>
 
                 </tr>
             </tbody>
                     
         </table>
     </div>
-    
+
     {% load django_tables2 %}
     {% render_table table %}
 {#        {% if can_edit %}#}
