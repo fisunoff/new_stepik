@@ -2,7 +2,7 @@
 {% block container %}
     <div class="card">
         <div class="main-content">
-            <div class="profile__container">
+            <div class="task__container">
                 <div class="course-name">
                     {{ task.name }}
                 </div>
@@ -23,7 +23,7 @@
                     </form>
                 </div>
             </div>
-            </div>
+        </div>
 
 
         <div class="right-menu">
@@ -41,7 +41,6 @@
         .main-content {
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
 
         .course-name {
@@ -102,6 +101,15 @@
         .list-group a:hover:after {
             left: -.5em;
             border-left-color: #9097A2;
+        }
+        .task__container {
+            background: rgba(55, 71, 79, 0.07);
+            border-radius: 24px;
+            margin-bottom: 90px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: 30px 20px;
         }
     </style>
 {% endblock %}
