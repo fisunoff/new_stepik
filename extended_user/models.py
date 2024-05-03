@@ -31,6 +31,10 @@ class Profile(TimestampedModel):
         return self.manager or self.user.is_superuser
 
     @property
+    def can_author(self):
+        return self.authoring or self.is_manager
+
+    @property
     def course_count(self):
         return 10
 

@@ -37,7 +37,7 @@ class CourseListView(SingleTableView):
             # Проверяем, является ли пользователь автором какого-либо курса (или имеет другие права для добавления)
             # context['user_can_create_course'] = Course.objects.filter(
             #     author=user_profile).exists() or user_profile.authoring
-            context['user_can_create_course'] = user_profile.authoring
+            context['user_can_create_course'] = user_profile.can_author
         else:
             context['user_can_create_course'] = False
         return context
