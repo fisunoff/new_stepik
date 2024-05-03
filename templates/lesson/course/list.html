@@ -1,5 +1,5 @@
 {% include "base.html" with page_title='Курсы' %}
-{% block custom_css %}
+<!-- {% block custom_css %}
 <style>
     .filter__btn {
         width: 13%;
@@ -31,7 +31,8 @@
     
 
 </style>
-{% endblock %}
+{% endblock %} -->
+
 
 {% block container %}
     <div class="container mt-4">
@@ -42,5 +43,24 @@
         {% if can_edit %}
             
         {% endif %}
+
+        <div class="courses__list">
+            <div class="containter">
+                <div class="course__item">
+                        <a href="#" class="course__flex">
+                        <div class="course__info">                      
+                            <div class="course__name">
+                                <h3 class="course__title text-h2">Redux для управления состоянием React-приложений</h3>
+                                <p class="course__desc text-p">Освойте принцип работы Redux — на классическом и современном вариантах использования. 2 проекта внутри.</p>
+                            </div>
+                        </div>
+                    </a>
+                  </div>
+            </div>
+        </div>
+        
+
+
     </div>
+    
 {% endblock %}

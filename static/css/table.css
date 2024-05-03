@@ -1,126 +1,32 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
+.courses__list {
+    margin-bottom: 16px;
 }
-body{
-    background-color: #eef8fe;
-}
-#form{
+.course__flex {
+    padding: 20px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 100%;
-    margin: auto;
-    overflow:inherit;
+    
+    border-bottom: 1px solid;
+    border-color: var(--blue-color);
+    /* border-radius: 10px; */
+}
+.course__img {
+    margin-right: 16px;
+}
+.course__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.course__name {
+    display: flex;
     flex-direction: column;
 }
-.table{
-    width: 100%;
-    min-height: 200px;
-    object-fit: contain;
-    background-color: #098cff;
-    border-radius: 16px;
-    padding: 10px 15px;
-    box-shadow: 1px 1px 10px black ;
-    margin-bottom: 30px;
-    margin-top:30px;
-    color: #fff;
+.course__title {
+    margin-bottom: 16px;
 }
-.table_caption{
-    font-family: "Montserrat", sans-serif;
-    color: #098cff;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 10px;
+.course__desc {
 }
-.table_header{
-    text-transform: capitalize;
-    font-size: 15px;
-}
-.first_row_elem{
-    font-size: 15px;
-    font-family: "Montserrat", sans-serif;
-    min-width: 130px;
-}
-.row_elem{
-    font-family: "Montserrat", sans-serif;
-    position: relative;
-}
-.header_row_elem{
-    font-family: "Montserrat", sans-serif;
-    position: relative;
-}
-.input{
-  font-size: 15px;
-  color:#098cff;
-  background-color: #fff;
-  width: 90%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing:border-box;
-  border-radius: 10px;
-  border: 2px #098cff solid;
-  font-family: "Montserrat", sans-serif;
-
-}
-#submit{
-    align-self: flex-end;
-    height: 80px;
-    width: 200px;
-    border-radius: 10px;
-    border: 0;
-    background-color: #098cff;
-    color: #fff;
-    font-family: "Montserrat", sans-serif;
-    font-size: 20px;
-    box-shadow: 1px 1px 10px black;
-
-}
-#submit:active{
-    border: 3px rgb(168, 253, 212) solid;
-    color: rgb(168, 253, 212);
-    box-shadow: 1px 1px 10px rgb(168, 253, 212);
-}
-#submitt{
-    align-self: flex-end;
-    height: 80px;
-    width: 200px;
-    border-radius: 10px;
-    border: 0;
-    background-color: #098cff;
-    color: #fff;
-    font-family: "Montserrat", sans-serif;
-    font-size: 20px;
-    box-shadow: 1px 1px 10px black;
-    transition: color .2s linear;
-
-}
-#submitt:active{
-    border: 3px rgb(168, 253, 212) solid;
-    color: rgb(168, 253, 212);
-    box-shadow: 1px 1px 10px rgb(168, 253, 212);
-}
-#submitt:hover{
-    color: rgb(168, 253, 212);
-}
-
-
-.table-filter{
-    width: 100%;
-    min-height: 50px;
-    object-fit: contain;
-    background-color: rgba(55, 71, 79, 0.07);
-    border-radius: 16px;
-    padding: 10px 15px;
-
-    margin-bottom: 30px;
-    color: black;
-}
-
-.main-column{
-    width: 100%;
-}
-.orderable{
-    color: #fff;
+.arrow__down {
 }
