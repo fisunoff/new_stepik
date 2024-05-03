@@ -44,14 +44,6 @@ class Block(AuthoringModel):
         return sum(self.task_set.values_list('max_mark', flat=True))
 
 
-class TaskType(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Тип задачи')
-    description = models.TextField(verbose_name='Описание', blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Task(AuthoringModel):
     '''
         answer_options =
@@ -69,13 +61,13 @@ class Task(AuthoringModel):
     name = models.CharField(max_length=1024, null=False, blank=False, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
     block = models.ForeignKey(to=Block, verbose_name='Блок', null=False, on_delete=models.CASCADE)
-    correct_answer = models.TextField(verbose_name='Правильный ответ', null=True, blank=True)
-    answer_answer = models.TextField(verbose_name='Варианты ответа', null=True, blank=True)
+    correct_answer = models.TextField(verbose_name='Правильный ответ (текст)', null=True, blank=True)
+    answer_options = models.TextField(verbose_name='Варианты ответа', null=True, blank=True)
+    correct_options_answer = models.TextField(verbose_name='Правильный ответ (из вариантов)', null=True, blank=True)
     max_mark = models.IntegerField('Максимальный балл')
     need_file = models.BooleanField(verbose_name='Можно приложить файл', default=False)
     autotest = models.BooleanField(verbose_name='Автоматическая проверка', default=True)
-    type = models.ForeignKey(TaskType, verbose_name='Тип задачи', on_delete=models.SET_NULL, null=True, blank=True)
-
+    type = models.CharField(choices=const.task_types, verbose_name='Тип задачи', default=const.TEXT, max_length=127)
 
     def __str__(self):
         return self.name
@@ -85,6 +77,9 @@ class Task(AuthoringModel):
         if trys.exists():
             return trys.first().mark
         return 0
+
+    def get_correct_radio_answer(self):
+        pass
 
 
 class Answer(AuthoringModel):

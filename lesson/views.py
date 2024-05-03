@@ -131,6 +131,13 @@ class TaskDetailView(DetailView):
     template_name = 'lesson/task/detail_answer.html'
 
 
+class TaskCreateView(CreateView):
+    model = Task
+    template_name = 'base_create.html'
+    fields = ('name', 'description', 'type', 'correct_answer')
+
+
+
 class AnswerCreateView(CreateView):
     model = Answer
     form_class = AnswerForm
