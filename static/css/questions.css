@@ -1,0 +1,24 @@
+.course-questions {
+    padding: 40px 0;
+}
+.course-questions-list {
+
+}
+.question__flex {
+    display: flex;
+    justify-content: space-between;
+}
+.question-form {
+    display: flex;
+    justify-content: space-between;
+}
+.question-input {
+    width: 100%;
+    margin-right: 32px;
+}
+.question-btn {
+    width: 20%;
+}
+.remove-btn {
+    margin-left: 32px;
+}

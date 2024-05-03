@@ -107,10 +107,115 @@
         <div class="well__text text-p">Знание основ JavaScript, CSS и HTML
         </div>
         <a href="{% url 'course-register' object.id %}" class="profile__btn well__btn text-p">Регистрация</a>
+
+        <section class="course-questions">
+            <h2 class="text-h2">Добавление вопросов</h2>
+            <ul class="course-questions-list" id="questions-list">
+              <!-- Список вопросов будет здесь -->
+            </ul>
+            <div class="questions__flex">
+                <form class="question-form" id="question-form">
+                <input class="login-form question-input" type="text" id="question-input" placeholder="Введите ваш вопрос" required>
+                <button class="profile__btn question-btn" type="submit">Добавить вопрос</button>
+                </form>
+            </div>
+          </section>
     </div>
 
+    
    
     
 </section>
+
+<script>
+    // Массив для хранения вопросов
+let questions = [];
+
+// Функция для добавления вопроса
+function addQuestion(questionText) {
+  const question = { text: questionText, isEditing: false };
+  questions.push(question);
+  updateQuestionsList();
+  saveQuestions();
+}
+
+// Функция для редактирования вопроса
+function editQuestion(index, newText) {
+  questions[index].text = newText;
+  questions[index].isEditing = false;
+  updateQuestionsList();
+  saveQuestions();
+}
+
+// Функция для переключения режима редактирования
+function toggleEdit(index) {
+  questions[index].isEditing = !questions[index].isEditing;
+  updateQuestionsList();
+}
+
+// Функция для удаления вопроса
+function removeQuestion(index) {
+  questions.splice(index, 1);
+  updateQuestionsList();
+  saveQuestions();
+}
+
+// Функция для обновления списка вопросов на странице
+function updateQuestionsList() {
+  const list = document.getElementById('questions-list');
+  list.innerHTML = '';
+  questions.forEach((question, index) => {
+    const questionInput = document.createElement('input');
+    questionInput.classList.add('login-form', 'question-input');
+    questionInput.type = 'text';
+    questionInput.value = question.text;
+    questionInput.readOnly = !question.isEditing;
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = question.isEditing ? 'Сохранить' : 'Редактировать';
+    editBtn.classList.add('profile__btn','question-btn');
+    editBtn.onclick = () => {
+      if (question.isEditing) {
+        editQuestion(index, questionInput.value);
+      } else {
+        toggleEdit(index);
+      }
+    };
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Удалить';
+    removeBtn.classList.add('profile__btn','question-btn');
+    removeBtn.onclick = () => removeQuestion(index);
+
+    const div = document.createElement('div');
+    div.appendChild(questionInput);
+    div.appendChild(editBtn);
+    div.appendChild(removeBtn);
+
+    list.appendChild(div);
+  });
+}
+
+// Функция для сохранения вопросов в JSON-файл
+function saveQuestions() {
+  const json = JSON.stringify(questions.map(question => question.text));
+  // Здесь код для отправки json на сервер или сохранения в файл
+  console.log('Сохраненные вопросы:', json);
+}
+
+// Обработчик событий для формы добавления вопросов
+document.getElementById('question-form').onsubmit = function(event) {
+  event.preventDefault();
+  const questionInput = document.getElementById('question-input');
+  const questionText = questionInput.value.trim();
+  if (questionText) {
+    addQuestion(questionText);
+    questionInput.value = ''; // Очистка поля ввода после добавления вопроса
+  }
+};
+
+// Инициализация списка вопросов, если есть сохраненные данные
+// Здесь код для загрузки сохраненных вопросов с сервера или из файла
+    </script>
 
 {% endblock %}
