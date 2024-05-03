@@ -1,7 +1,6 @@
 .well__hero {
     background-color: var(--dark-color);
-    padding: 64px 20px;
-    margin-bottom: 44px;
+    padding: 72px 20px;
 }
 .well__flex {
     display: flex;
@@ -32,6 +31,7 @@
 
 .well__content {
     color: rgba(26, 26, 26, 0.851);
+    padding-bottom: 48px;
 }
 .well__title2 {
     margin-top: 32px;
@@ -39,7 +39,7 @@
 }
 .well__text {
     color: rgba(26, 26, 26, 0.851);
-    margin-bottom: 16px;
+    margin-bottom: 40px;
 }
 .ul__title {
     margin-top: 16  px;
@@ -50,5 +50,6 @@
 .li-elem {
     margin-bottom: 12px;
 }
+
 
 
