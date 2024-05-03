@@ -21,14 +21,14 @@ class CourseListView(SingleTableView):
 class CourseCreateView(CreateView):
     model = Course
     template_name = 'base_create.html'
-    fields = ('name', 'description')
+    fields = ('name', 'description', 'image')
     success_url = reverse_lazy('course-list')
 
 
 class CourseUpdateView(UpdateView):
     model = Course
     template_name = 'base_create.html'
-    fields = ('name', 'description')
+    fields = ('name', 'description', 'image')
 
     def get_success_url(self):
         # self.object.time_edit = timezone.now()
