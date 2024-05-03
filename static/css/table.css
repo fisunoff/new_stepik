@@ -1,41 +1,63 @@
+
 .courses__list {
     margin-bottom: 16px;
 }
 .course__item {
-    border-bottom: 1px solid;
-    border-color: var(--blue-color);
+    
+    
 }
 .course__flex {
-    padding: 20px 0px;
+    
     display: flex;
+    /* justify-content: space-between; */
     align-items: center;
     
-    
-    /* border-radius: 10px; */
 }
 .course__img {
+    max-width: 100px;
     width: 10%;
     height: auto;
     border-radius: 10px;
     margin-right: 16px;
 
 }
+.course__btn {
+    margin: 0;
+}
 .course__info {
+    padding: 20px 0px;
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid;
+    border-color: var(--blue-color);
 }
 .course__name {
     display: flex;
     flex-direction: column;
+    width: 80%;
+    margin-right: 16px;
 }
 .course__title {
     margin-bottom: 8px;
 }
-.course__desc {
-}
 .course__autor {
     margin-bottom: 20px;
 }
-.arrow__down {
+.course-down-content {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   /* align-items: center; */
+}
+.review-icons {
+    color: var(--blue-color);
+   margin-bottom: 16px;
+}
+.course__time {
+    display: flex;
+    margin-bottom: 16px;
+}
+.course__desc {
+    color: var(--grey-color);
 }
