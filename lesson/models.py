@@ -43,6 +43,9 @@ class Block(AuthoringModel):
     def max_mark(self):
         return sum(self.task_set.values_list('max_mark', flat=True))
 
+    def can_edit(self, profile) -> bool:
+        return self.course.can_edit(profile)
+
 
 class Task(AuthoringModel):
     '''
@@ -78,6 +81,9 @@ class Task(AuthoringModel):
             return trys.first().mark
         return 0
 
+    def can_edit(self, profile) -> bool:
+        return self.block.can_edit(profile)
+
     def get_correct_radio_answer(self):
         pass
 
@@ -106,6 +112,9 @@ class Answer(AuthoringModel):
         if int(self.answer) in correct_answers:
             return self.task.max_mark
         return 0
+
+    def can_edit(self, profile) -> bool:
+        return self.task.can_edit(profile)
 
 
 class CourseRegister(TimestampedModel):

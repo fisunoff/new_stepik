@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block container %}
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ title }}</h5>
+            </div>
+            <div class="card-body">
+                <div>Задание: {{ object.task.name }}<br>
+                {{ object.task.description|linebreaks }}</div>
+                <div>Автор решения: {{ object.author }}</div>
+                <div>Ответ: {{ object.answer }}</div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-success">
+                        Оценить
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

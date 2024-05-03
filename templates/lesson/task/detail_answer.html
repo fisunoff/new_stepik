@@ -24,6 +24,16 @@
                 </div>
                     <div class="mark">Максимальный балл: {{ task.max_mark }}</div>
                     <div class="mark">Лучшая попытка: {{ best_try }}</div>
+                    <div>Решения:</div>
+                    <ol class="list-group">
+                        {% for row in answers_qs %}
+                            {% if can_edit %}
+                                <a href="{% url 'answer-update' pk=row.pk %}"> {{ row.answer }}, {{ row.created }}({{ row.status }}) - {{ row.mark }} </a>
+                            {% else %}
+                                <a href="#"> {{ row.id }}{{ row.name }}, {{ row.created }} </a>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
             </div>
         </div>
 

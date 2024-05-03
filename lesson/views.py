@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_tables2 import SingleTableView, SingleTableMixin
 
-from lesson.forms import AnswerForm
+from lesson.forms import AnswerForm, AnswerUpdateForm
 from lesson.models import Course, Block, CourseRegister, Task, Answer
 from lesson.tables import CourseTable, BlockTable
 
@@ -126,23 +126,16 @@ class CourseRegistrationView(CreateView):
         return reverse_lazy('course-detail', kwargs={'pk': self.object.pk})
 
 
-class TaskDetailView(DetailView):
-    model = Task
-    template_name = 'lesson/task/detail_answer.html'
-
-
 class TaskCreateView(CreateView):
     model = Task
     template_name = 'base_create.html'
     fields = ('name', 'description', 'type', 'correct_answer')
 
 
-
 class AnswerCreateView(CreateView):
     model = Answer
     form_class = AnswerForm
     template_name = 'lesson/task/detail_answer.html'
-    # template_name = 'base_create.html'
 
     def get(self, request, from_pk, *args, **kwargs):
         self.task = get_object_or_404(Task, pk=from_pk)
@@ -156,9 +149,15 @@ class AnswerCreateView(CreateView):
         return reverse_lazy('answer-create', kwargs={'from_pk': self.task.pk})
 
     def get_context_data(self, **kwargs):
+        profile = self.request.user.profile
         kwargs = super().get_context_data(**kwargs)
         kwargs['task'] = self.task
-        kwargs['best_try'] = self.task.best_try(profile=self.request.user.profile)
+        kwargs['best_try'] = self.task.best_try(profile=profile)
+        if self.task.can_edit(profile):
+            kwargs['answers_qs'] = self.task.answer_set.all()
+        else:
+            kwargs['answers_qs'] = self.task.answer_set.filter(author=profile)
+        kwargs['can_edit'] = self.task.can_edit(profile)
         return kwargs
 
     def get_form_kwargs(self, **kwargs):
@@ -166,3 +165,13 @@ class AnswerCreateView(CreateView):
         kwargs['task'] = self.task
         kwargs['profile'] = self.request.user.profile
         return kwargs
+
+
+class AnswerUpdateView(UpdateView):
+    model = Answer
+    template_name = 'lesson/task/answer_update.html'
+    form_class = AnswerUpdateForm
+
+    def get_success_url(self):
+        answer = Answer.objects.get(pk=self.kwargs['pk'])
+        return reverse_lazy('answer-create', kwargs={'from_pk': answer.task.pk})
