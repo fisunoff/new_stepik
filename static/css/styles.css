@@ -21,10 +21,10 @@
 .burger_line:last-child {
     margin-bottom: 0;
 }
-
+/* 
 li {
     list-style-type: none;
-}
+} */
 
 ul#slide-out:not(.browser-default) {
     padding-left: 0;

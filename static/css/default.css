@@ -53,6 +53,14 @@ body {
     color: var(--blue-color);
 }
 
+.text-hight {
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--dark-color);
+}
+
 .text-h2 {
     font-family: 'Ubuntu', sans-serif;
     font-style: normal;

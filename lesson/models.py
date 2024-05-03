@@ -1,7 +1,7 @@
 from django.db import models
 
 from lesson import const
-from utils.models import EditingModel, AuthoringModel
+from utils.models import EditingModel, AuthoringModel, TimestampedModel
 
 
 # Create your models here.
@@ -26,6 +26,10 @@ class Course(EditingModel):
         import random
         return random.randint(1, 5)
 
+    @property
+    def max_mark(self):
+        return sum(b.max_mark for b in self.block_set.all())
+
 
 class Block(AuthoringModel):
     name = models.CharField(max_length=1024, null=False, blank=False, verbose_name='Наименование')
@@ -34,6 +38,10 @@ class Block(AuthoringModel):
 
     def __str__(self):
         return self.name
+
+    @property
+    def max_mark(self):
+        return sum(self.task_set.values_list('max_mark', flat=True))
 
 
 class Task(AuthoringModel):
@@ -51,10 +59,27 @@ class Task(AuthoringModel):
 
 class Answer(AuthoringModel):
     status = models.CharField(max_length=127, choices=const.statuses, default=const.IN_PROGRESS)
-    answer = models.TextField(verbose_name='Правильный ответ', null=True, blank=False)
-    mark = models.IntegerField('Максимальный балл')
+    answer = models.TextField(verbose_name='Ответ', null=True, blank=False)
+    mark = models.IntegerField('Балл')
     task = models.ForeignKey(to=Task, null=False, on_delete=models.CASCADE)
     file = models.FileField(verbose_name="Прикрепленный файл", blank=True, null=True, upload_to='media/')
 
     def __str__(self):
         return f'{self.answer} ({self.mark})'
+
+
+class CourseRegister(TimestampedModel):
+    profile = models.ForeignKey(to='extended_user.Profile', on_delete=models.CASCADE, null=False, blank=False,
+                                verbose_name='Пользователь')
+    course = models.ForeignKey(to=Course, null=False, blank=False, on_delete=models.CASCADE,
+                               verbose_name='Курс')
+
+    @property
+    def mark(self):
+        return sum(i.mark or 0 for i in Answer.objects.filter(task__block__course=self.course, author=self.profile)) or 0
+
+    @property
+    def percent(self):
+        if self.course.max_mark:
+            return round(self.mark / self.course.max_mark * 100, 0)
+        return 0

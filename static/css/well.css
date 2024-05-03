@@ -1,0 +1,54 @@
+.well__hero {
+    background-color: var(--dark-color);
+    padding: 64px 20px;
+    margin-bottom: 44px;
+}
+.well__flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.well__name {
+
+}
+.well__title {
+    margin-bottom: 16px;
+    color: var(--light-color);
+}
+.well__subtitle {
+    color: #e7f5ff9e;
+    margin-bottom: 16px;
+}
+.certif__con {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+}
+.well__btn {
+    margin: 0;
+    background-color: var(--blue-color);
+    position: unset;
+}
+
+.well__content {
+    color: rgba(26, 26, 26, 0.851);
+}
+.well__title2 {
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+.well__text {
+    color: rgba(26, 26, 26, 0.851);
+    margin-bottom: 16px;
+}
+.ul__title {
+    margin-top: 16  px;
+}
+.well__ul {
+    margin-bottom: 32px;
+}
+.li-elem {
+    margin-bottom: 12px;
+}
+
+
