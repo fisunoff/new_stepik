@@ -1,28 +1,30 @@
 {% extends "base.html" %}
 {% block container %}
-    <div class="main-content">
-        <div class="base">
-            <div class="course-name">
-                {{ task.name }}
+    <div class="card">
+        <div class="main-content">
+            <div class="profile__container">
+                <div class="course-name">
+                    {{ task.name }}
+                </div>
+                <div>Максимальный балл - {{ task.max_mark }}</div>
+                <div>Лучшая попытка - {{ best_try }}</div>
+                {{ task.description|linebreaks }}
+                <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">{{ title }}</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit" class="btn btn-success">
+                            Отправить ответ
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div>Максимальный балл - {{ task.max_mark }}</div>
-            <div>Лучшая попытка - {{ best_try }}</div>
-            {{ task.description|linebreaks }}
-            <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">{{ title }}</h5>
             </div>
-            <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{form.as_p}}
-                    <button type="submit" class="btn btn-success">
-                        Отправить ответ
-                    </button>
-                </form>
-            </div>
-        </div>
-        </div>
+
 
         <div class="right-menu">
             <ol class="list-group">
@@ -32,6 +34,7 @@
                     </li>
                 {% endfor %}
             </ol>
+        </div>
         </div>
     </div>
     <style>
@@ -49,7 +52,7 @@
         .list-group {
             counter-reset: li;
             list-style: none;
-            font: 14px "Trebuchet MS", "Lucida Sans";
+            font: 20px "Trebuchet MS", "Lucida Sans";
             padding: 0;
         }
 
@@ -63,6 +66,7 @@
             text-decoration: none;
             transition: all .3s ease-out;
             border-radius: 5px;
+            width: 200px;
         }
 
         .list-group a:hover {
