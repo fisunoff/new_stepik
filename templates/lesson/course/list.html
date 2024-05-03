@@ -1,12 +1,75 @@
 {% include "base.html" with page_title='Курсы' %}
 
+<style>
+.course__container {
+    display: flex;
+    justify-content: space-between; /* Располагает дочерние элементы на противоположных концах */
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+}
+
+.course__info-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1; /* Заполняет все доступное пространство, кроме пространства для иконок */
+}
+
+.edit-delete-icons {
+    margin-left: auto; /* Автоматический отступ слева толкает элементы вправо */
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+}
+
+.edit-delete-icons a {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.create-icons a {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.edit-delete-icons a:hover {
+    background-color: #0056b3;
+}
+.create-icons a:hover {
+    background-color: #0056b3;
+}
+
+</style>
 {% block container %}
     <div class="container mt-4">
-        <a href="{% url 'course-create' %}" class="add-button">Добавить курс</a>
 
+        {% if user_can_create_course %}
+            <div class="create-icons">
+                <a href="{% url 'course-create' %}" class="add-button">Добавить курс</a>
+            </div>
+        {% endif %}
+
+{#    {% load render_table from django_tables2 %} {% render_table table %}#}
         <div class="courses__list">
             <div class="containter">
             {% for row in course_list %}
+                {% if user.is_superuser or row.user_can_edit %}
+                <div class="edit-delete-icons">
+                    <a href="{% url 'course-update' row.id %}">&#9997;</a>
+                    <a href="{% url 'course-delete' row.id %}" onclick="return confirm('Точно хотите удалить?')">&#10060;</a>
+                </div>
+                {% endif %}
                 <a href="{% url 'course-detail' pk=row.id %}" class="course__item">
                     <div class="course__info">
                         {% if row.image %}
@@ -17,8 +80,9 @@
                         <div class="course__name">
                             <h3 class="course__title text-h2">{{ row.name }}</h3>
                             <p class="course__autor text-p">{{ row.author }}</p>
-                            <p class="course__desc text-p">{{ row.description|linebreaks }}</p>    
+                            <p class="course__desc text-p">{{ row.description|linebreaks }}</p>
                         </div>
+
                         <div class="course-down-content">
                             <div class="review-icons">
                                         &#9733 &#9733 &#9733 &#9733 &#9733
@@ -37,19 +101,18 @@
                                         <p class="text-p" style="color: var(--grey-color);">11ч</p>
                             </div>
                             <p class="course__btn header-link">Пройти курс</p>
-                        </div> 
-                    </div> 
+                        </div>
+                    </div>
                 </a>
             {% endfor %}
             </div>
         </div>
         {% if can_edit %}
-            
         {% endif %}
 
-        
+
 
 
     </div>
-    
+
 {% endblock %}

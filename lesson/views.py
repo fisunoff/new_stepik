@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
@@ -7,17 +8,38 @@ from lesson.models import Course, Block, CourseRegister, Task
 from lesson.tables import CourseTable, BlockTable
 
 
-
-
-# Create your views here.
 class CourseListView(SingleTableView):
     model = Course
     template_name = 'lesson/course/list.html'
     table_class = CourseTable
 
     def get_queryset(self):
-        return Course.objects.all()
-        # return Class.objects.filter(event_id=self.request.GET.get('event_id'))
+        queryset = super().get_queryset()
+        user_profile = None
+        if self.request.user.is_authenticated:
+            user_profile = self.request.user.profile
+            for course in queryset:
+                course.user_can_edit = self.request.user.is_superuser or course.can_edit(user_profile)
+        return queryset
+        # queryset = super().get_queryset()
+        # if self.request.user.is_authenticated:
+        #     user_profile = self.request.user.profile
+        #     filtered_courses = [course.id for course in queryset if course.can_edit(user_profile)]
+        #     print("Filtered courses:", filtered_courses)  # Вывод для отладки
+        #     queryset = queryset.filter(id__in=filtered_courses)
+        # return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(CourseListView, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            user_profile = self.request.user.profile
+            # Проверяем, является ли пользователь автором какого-либо курса (или имеет другие права для добавления)
+            # context['user_can_create_course'] = Course.objects.filter(
+            #     author=user_profile).exists() or user_profile.authoring
+            context['user_can_create_course'] = user_profile.authoring
+        else:
+            context['user_can_create_course'] = False
+        return context
 
 
 class CourseCreateView(CreateView):
@@ -25,6 +47,26 @@ class CourseCreateView(CreateView):
     template_name = 'base_create.html'
     fields = ('name', 'description', 'image')
     success_url = reverse_lazy('course-list')
+
+    def form_valid(self, form):
+        # Перемещаем проверку профиля на первое место
+        user_profile = getattr(self.request.user, 'profile', None)
+        if not user_profile:
+            form.add_error(None, 'Ошибка: у пользователя нет профиля. Необходим профиль для создания курса.')
+            return self.form_invalid(form)
+
+        # Обработка файла перед сохранением объекта
+        file = self.request.FILES.get('image')
+        if file:
+            print("File received: ", file.name)
+        else:
+            print("No file received")
+
+        self.object = form.save(commit=False)
+        self.object.author = user_profile
+        self.object.save()
+        form.save_m2m()  # Сохраняем связанные данные ManyToMany, если есть
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class CourseUpdateView(UpdateView):
