@@ -44,14 +44,37 @@ class Block(AuthoringModel):
         return sum(self.task_set.values_list('max_mark', flat=True))
 
 
+class TaskType(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Тип задачи')
+    description = models.TextField(verbose_name='Описание', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Task(AuthoringModel):
+    '''
+        answer_options =
+        [
+          {"id": 1, "text": "Вариант ответа№1"},
+          {"id": 2, "text": "Вариант ответа№2"},
+          {"id": 3, "text": "Вариант ответа№3"},
+        ]
+
+        correct_options =
+        {
+          "correact_ids": [1,3]
+        }
+    '''
     name = models.CharField(max_length=1024, null=False, blank=False, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
     block = models.ForeignKey(to=Block, verbose_name='Блок', null=False, on_delete=models.CASCADE)
     correct_answer = models.TextField(verbose_name='Правильный ответ', null=True, blank=True)
-    max_mark = models.IntegerField('Максимальный балл')
+    answer_answer = models.TextField(verbose_name='Варианты ответа', null=True, blank=True)    max_mark = models.IntegerField('Максимальный балл')
     need_file = models.BooleanField(verbose_name='Можно приложить файл', default=False)
     autotest = models.BooleanField(verbose_name='Автоматическая проверка', default=True)
+    type = models.ForeignKey(TaskType, verbose_name='Тип задачи', on_delete=models.SET_NULL, null=True, blank=True)
+
 
     def __str__(self):
         return self.name
@@ -79,6 +102,14 @@ class Answer(AuthoringModel):
         else:
             self.mark = 0
         status = const.DONE
+
+    def evaluate_answer(self):
+        # Получаем правильные ответы
+        correct_answers = self.task.correct_answer['correct_ids']
+        # Проверяем, содержится ли ответ студента среди правильных
+        if int(self.answer) in correct_answers:
+            return self.task.max_mark
+        return 0
 
 
 class CourseRegister(TimestampedModel):
