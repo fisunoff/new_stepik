@@ -1,24 +1,88 @@
 {% extends "base.html" %}
 {% block container %}
     <div class="main-content">
-    <div class="profile__container">
-      <div>
-          {{ object.name }}
-      </div>
-    <div>
-        {{ object.description }}
-    </div>
-    <div>Кнопка</div>
+        <div class="base">
+            <div class="course-name">
+                {{ object.name }}
+            </div>
+            {{ object.description }}
+            <div>Кнопка</div>
+        </div>
 
+        <div class="right-menu">
+            <ol class="list-group">
+                {% for row in object.block.task_set.all %}
+                    <li class="list-group-item">
+                        <a href=""> {{ row.name }} </a>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
     </div>
-    </div>
-        
-    <div class="right-menu">
-      {% for row in object.block.task_set.all %}
-          <div>
-              {{ row.name }}
-          </div>
-      {% endfor %}
-    </div>
+    <style>
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
+        .course-name {
+            color: var(--blue-color);
+            font-size: 20px;
+        }
+
+        .list-group {
+            counter-reset: li;
+            list-style: none;
+            font: 14px "Trebuchet MS", "Lucida Sans";
+            padding: 0;
+        }
+
+        .list-group a {
+            position: relative;
+            display: block;
+            padding: .4em .4em .4em .8em;
+            margin: .5em 0 .5em 2.5em;
+            background: var(--blue-color);
+            color: white;
+            text-decoration: none;
+            transition: all .3s ease-out;
+            border-radius: 5px;
+        }
+
+        .list-group a:hover {
+            background: var(--light-color);
+        }
+
+        .list-group a:before {
+            content: counter(li);
+            counter-increment: li;
+            position: absolute;
+            left: -2.5em;
+            top: 50%;
+            margin-top: -1em;
+            background: var(--blue-color);
+            height: 2em;
+            width: 2em;
+            line-height: 2em;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .list-group a:after {
+            position: absolute;
+            content: "";
+            border: .5em solid transparent;
+            left: -1em;
+            top: 50%;
+            margin-top: -.5em;
+            transition: all .3s ease-out;
+        }
+
+        .list-group a:hover:after {
+            left: -.5em;
+            border-left-color: #9097A2;
+        }
+    </style>
 {% endblock %}

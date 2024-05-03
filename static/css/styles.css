@@ -341,3 +341,11 @@ textarea {
     border: none;
     border-radius: 10px;
 }
+
+
+/* страница с шагами */
+.container1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
