@@ -9,3 +9,4 @@ Pillow>=10.1.0
 
 dramatiq~=1.15.0
 django-filter~=23.5
+django-ordered-model~=3.7.4

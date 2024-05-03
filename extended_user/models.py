@@ -38,6 +38,7 @@ class Profile(TimestampedModel):
 
 
 class Department(AuthoringModel):
+    name = models.CharField('Наименование', null=False, blank=False, max_length=1024)
     head = models.ForeignKey(to='extended_user.Department', verbose_name='Головное подразделение',
                              null=True, blank=True, on_delete=models.SET_NULL)
     chief = models.ForeignKey(to=Profile, verbose_name='Начальник', null=True, blank=True, on_delete=models.SET_NULL,
