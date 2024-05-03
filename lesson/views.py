@@ -7,6 +7,8 @@ from lesson.models import Course, Block
 from lesson.tables import CourseTable, BlockTable
 
 
+
+
 # Create your views here.
 class CourseListView(SingleTableView):
     model = Course

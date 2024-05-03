@@ -6,6 +6,7 @@ from docxtpl import DocxTemplate
 from certificate.models import GeneratedDocument
 from tags.tag_manager import manager
 
+from docx2pdf import convert
 
 def gen_document(document_id):
     document = GeneratedDocument.objects.get(id=document_id)
@@ -28,5 +29,10 @@ def gen_document(document_id):
 
     template.render(context)
     template.save(outpath)
-    document.set_document(path, 'Сертификат.docx')
+
+
+    pdf_name = os.path.join(basedir, "", 'output.pdf')
+
+    convert(outpath, pdf_name)
+    document.set_document(pdf_name, 'Сертификат.pdf')
     document.save()
