@@ -3,25 +3,25 @@
     <div class="card">
         <div class="main-content">
             <div class="task__container">
-                <div class="course-name">
+                <div class="course-name text-h1">
                     {{ task.name }}
                 </div>
-                <div>Максимальный балл - {{ task.max_mark }}</div>
-                <div>Лучшая попытка - {{ best_try }}</div>
                 {{ task.description|linebreaks }}
                 <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">{{ title }}</h5>
-                </div>
-                <div class="card-body">
+{#                <<div class="card-header">#}
+{#                    <h5 class="card-title-task">{{ title }}</h5>#}
+{#                </div>#}
+                <div class="card-body-task">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{form.as_p}}
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn profile__btn text-p">
                             Отправить ответ
                         </button>
                     </form>
                 </div>
+                    <div class="mark">Максимальный балл: {{ task.max_mark }}</div>
+                    <div class="mark">Лучшая попытка: {{ best_try }}</div>
             </div>
         </div>
 
@@ -47,10 +47,6 @@
             justify-content: space-between;
         }
 
-        .course-name {
-            color: var(--blue-color);
-            font-size: 20px;
-        }
 
         .list-group {
             counter-reset: li;
@@ -118,6 +114,13 @@
             justify-content: space-between;
             flex-direction: column;
             padding: 30px 20px;
+            width: 70%;
+        }
+        .card-body-task {
+            background: rgba(0, 0, 0, 0);
+        }
+        .mark {
+            color: #5F6982;
         }
     </style>
 {% endblock %}

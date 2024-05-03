@@ -305,8 +305,10 @@ textarea {
     background-color: var(--blue-color);
     display: block;
     width: 40%;
+    height: 50px;
     margin-right: 50px !important;
     padding: 10px;
+    margin-bottom: 20px;
     font-family: "Montserrat", sans-serif;
     color: #FFF;
     border: none;
