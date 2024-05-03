@@ -59,11 +59,12 @@
                         </svg>                        
                     <div class="text-h3" style="color: #e7f5ff9e; margin-left: 8px;">Сертификат Employee Training</div>
                 </div>
-                <a href="" class="profile__btn well__btn text-p">Регистрация</a>
+                <a href="{% url 'course-register' object.id %}" class="profile__btn well__btn text-p">Регистрация</a>
             </div> 
             <video width="400" height="300" controls="controls" src="https://www.youtube.com/watch?v=LoYbN6qoQHA"></video>
         </div>
     </div>
+
 </section>
 <section class="well__content">
     <div class="container">
@@ -105,7 +106,10 @@
         <div class="well__title2 text-hight">Начальные требования</div>
         <div class="well__text text-p">Знание основ JavaScript, CSS и HTML
         </div>
+        <a href="{% url 'course-register' object.id %}" class="profile__btn well__btn text-p">Регистрация</a>
     </div>
+
+   
     
 </section>
 
