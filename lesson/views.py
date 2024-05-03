@@ -85,4 +85,4 @@ class CourseRegistrationView(CreateView):
 
 class TaskDetailView(DetailView):
     model = Task
-    template_name = 'lesson/course/detail.html'
+    template_name = 'lesson/task/detail.html'

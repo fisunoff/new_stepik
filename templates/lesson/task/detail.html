@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block container %}
+    <div class="main-content">
+    <div class="profile__container">
+      <div>
+          {{ object.name }}
+      </div>
+    <div>
+        {{ object.description }}
+    </div>
+    <div>Кнопка</div>
+
+    </div>
+    </div>
+        
+    <div class="right-menu">
+      {% for row in object.block.task_set.all %}
+          <div>
+              {{ row.name }}
+          </div>
+      {% endfor %}
+    </div>
+
+{% endblock %}
