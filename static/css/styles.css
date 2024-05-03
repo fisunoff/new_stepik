@@ -30,11 +30,11 @@ ul#slide-out:not(.browser-default) {
     padding-left: 0;
     list-style-type: none;
   }
-  
+
 ul#slide-out:not(.browser-default) > li {
     list-style-type: none;
   }
-  
+
 .burger {
     display: none;
 }
@@ -56,20 +56,20 @@ ul#slide-out:not(.browser-default) > li {
 
   }
 
-  
+
   .sidenav .collapsible {
     margin: 0;
   }
-  
+
   .sidenav li {
     float: none;
     line-height: 48px;
   }
-  
+
   .sidenav li.active {
     background-color: rgba(0, 0, 0, 0.05);
   }
-  
+
   .sidenav li > a {
     color: rgba(0, 0, 0, 0.87);
     display: block;
@@ -79,15 +79,15 @@ ul#slide-out:not(.browser-default) > li {
     line-height: 48px;
     padding: 0 32px;
   }
-  
+
   .sidenav li > a:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
-  
+
   .sidenav .collapsible-body {
     padding: 0;
   }
-  
+
   .sidenav-overlay {
     position: fixed;
     top: 0;
@@ -199,7 +199,7 @@ ul#slide-out:not(.browser-default) > li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     border: 1px solid;
     border-color: var(--blue-color);
     border-radius: 10px;
@@ -223,3 +223,65 @@ ul#slide-out:not(.browser-default) > li {
 }
 .arrow__down {
 }
+
+
+/* для таблицы */
+
+body {
+    background: rgb(0, 0, 0, 0.05) !important;
+}
+
+.card-title {
+    color: var(--blue-color);
+}
+
+.card-body {
+    background: var(--light-color);
+}
+
+.card-body form p input {
+    background-color: var(--blue-color);
+    display: block;
+    width: 40%;
+    margin-top: 10px;
+    margin-right: 50px;
+    padding: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    color: #FFF;
+    border: none;
+    border-radius: 10px;
+}
+.card-body form p input:hover {
+    border: none;
+}
+
+p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    color: var(--blue-color);
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 18px;
+}
+
+textarea {
+    background-color: var(--blue-color);
+    display: block;
+    width: 40%;
+    margin-right: 50px !important;
+    padding: 10px;
+    font-family: "Montserrat", sans-serif;
+    color: #FFF;
+    border: none;
+    border-radius: 10px;
+}
+

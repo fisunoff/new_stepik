@@ -30,6 +30,10 @@ class Profile(TimestampedModel):
     def is_manager(self):
         return self.manager or self.user.is_superuser
 
+    @property
+    def course_count(self):
+        return 10
+
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
