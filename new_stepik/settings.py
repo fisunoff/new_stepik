@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_select2',
 
     'extended_user',
+    'lesson',
 ]
 
 MIDDLEWARE = [

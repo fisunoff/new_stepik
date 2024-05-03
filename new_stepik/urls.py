@@ -27,4 +27,5 @@ urlpatterns = [
     path('users/', include('extended_user.urls')),
     path('accounts/profile/', ProfileDetailView.as_view(), name='self-profile-detail'),
     path('reg/', SignUp.as_view(), name='reg'),
+    path('courses/', include('lesson.urls')),
 ]

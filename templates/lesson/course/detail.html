@@ -1,0 +1,29 @@
+{% include "base.html" %}
+
+{% block container %}
+    <div class="container stock__container">
+        <table class="table stock__table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Единица измерения</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ object.name }}</td>
+                    <td>{{ object.measure_type }}</td>
+
+                </tr>
+            </tbody>
+                    
+        </table>
+    </div>
+    
+    {% load django_tables2 %}
+    {% render_table table %}
+{#        {% if can_edit %}#}
+{#            <a href="{% url 'product-update' object.pk %}" class="login__btn stock__btn text-p">Редактировать</a>#}
+{#        {% endif %}#}
+
+{% endblock %}
