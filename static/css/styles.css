@@ -119,6 +119,7 @@ ul#slide-out:not(.browser-default) > li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0;
 }
 .header-link__items {
     display: flex;
