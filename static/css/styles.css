@@ -144,6 +144,11 @@ ul#slide-out:not(.browser-default) > li {
     height: 32px;
 }
 /* ПРОФИЛЬ */
+.profile__btns {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
 .prof__cont{
     padding: 0 20px;
 }
@@ -188,6 +193,26 @@ ul#slide-out:not(.browser-default) > li {
 }
 .profile__text {
     color: var(--dark-color);
+}
+.profile__btn {
+    margin-bottom: 30px;
+    margin-right: 32px;
+    width: 100%;
+    height: 50px;
+    padding: 16px 32px;
+    text-align: center;
+    color: var(--white-color);
+
+    background-color: var(--blue-color);
+    border-radius: 12px;
+    border: none;
+
+    transition: background-color .2s linear;
+
+}
+
+.profile__btn:hover {
+    background-color: var(--grey-color);
 }
 
 .certificate {
