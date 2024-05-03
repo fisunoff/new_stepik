@@ -12,6 +12,14 @@ class Course(EditingModel):
     def __str__(self):
         return self.name
 
+    @property
+    def demands_str(self):
+        res = ''
+        for demand in self.demand_set.all():
+            res += f'{demand.name}: от {demand.percent}\n'
+        res.strip('\n')
+        return res
+
 
 class Block(AuthoringModel):
     name = models.CharField(max_length=1024, null=False, blank=False, verbose_name='Наименование')

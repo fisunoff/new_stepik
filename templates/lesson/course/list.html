@@ -28,15 +28,28 @@
         border-color: var(--dark-color);
         background-color: var(--light-color);
     }
-    
-
+    .add-button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: white;
+        background-color: #007BFF;
+        text-align: center;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+    .add-button:hover {
+        background-color: #0056b3;
+    }
 </style>
 {% endblock %} -->
 
 
 {% block container %}
     <div class="container mt-4">
-        
+        <a href="{% url 'course-create' %}" class="add-button">Добавить курс</a>
         {% load render_table from django_tables2 %}
 
         {% render_table table %}
