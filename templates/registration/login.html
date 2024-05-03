@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block container %}
+    {% if user.is_authenticated %}
+        <div class="alert alert-warning" role="alert" style="text-align: center">Ты уже зареган</div>
+    {% else %}
+    <div class="container mt-4">
+        {% if form.errors %}
+          <p>Пара логин/пароль не подходит. Пожалуйста, попробуйте снова</p>
+        {% endif %}
+
+        {% if next %}
+          {% if user.is_authenticated %}
+            <p>Недостаточно прав для доступа к этой странице.
+            Пожалуйста, войдите в свой аккаунт</p>
+          {% else %}
+            <p>Пожалуйста, войдите в свой аккаунт.</p>
+          {% endif %}
+        {% endif %}
+        <div class="login__container">  
+          <h1 class="login__title text-h1">Вход</h1>  
+          <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <table class="table table-hover">
+            <div class="form-recovery">
+                <input class="login-form text-p" name="username" id="{{ form.username.auto_id }}" type="text" placeholder="Логин">
+                <input class="login-form text-p" name="password" id="{{ form.password.auto_id }}" type="password" placeholder="Пароль">
+                <a class="recovery__btn text-p" href="#">Забыли пароль?</a>
+            </div>
+          </table>
+
+          <div class="login-sign">
+            <input class="login__btn text-p" type="submit" value="Войти"/>
+            <input class="login__btn text-p" type="hidden" name="next" value="{{ next }}" />
+            <a href="{% url 'reg' %}" class="signup__btn text-p">Зарегистрироваться</a>
+          </div>
+          </form>
+        </div>
+        <!-- <div class="login__container"> -->
+          <!-- <h1 class="login__title text-h1">Вход</h1>
+          <div class="form-recovery">
+              <input class="login-form text-p" id="{form.username.auto_id}" type="text" placeholder="Логин">
+              <input class="login-form text-p" id="{form.password.auto_id}" type="text" placeholder="Пароль">
+              <a class="recovery__btn text-p" href="#">Забыли пароль?</a>
+          </div> -->
+  
+          <!-- <div class="login-sign"> -->
+              <!-- <form type="submit"><button class="login__btn text-p">Войти</button></form>
+              <form action="{% url 'reg' %}"><button class="signup__btn text-p">Зарегестрироваться</button></form> -->
+          <!-- </div> -->
+      <!-- </div> -->
+
+    </div>
+    {% endif %}
+
+{% endblock %}

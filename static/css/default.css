@@ -1,0 +1,87 @@
+html {
+    box-sizing: border-box;
+}
+
+*,*::before, *::after {
+    box-sizing: inherit;
+}
+
+h1, h2, h3, p {
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+:root {
+    --blue-color: #EF826B;
+    --dark-color: #56686E;
+    --grey-color: #aab6b2;
+    --light-color: #e9e9e9;
+    --white-color: #fff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    background-color: var(--light-color);
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+/* Стили для текста */
+.main-text-h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 52px;
+    letter-spacing: 0.05em;
+    color: var(--blue-color);
+}
+
+.text-h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 41px;
+    color: var(--blue-color);
+}
+
+.text-h2 {
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    letter-spacing: 0.005em;
+    color: var(--dark-color);
+}
+
+.text-p {
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    color: #000000;
+}
+
+.footer-l {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    color: var(--white-color);
+
+    transition: color .2s linear;    
+}
+
+.footer-l:hover {
+    color: var(--blue-color);
+}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block container %}
+
+{% if form.errors %}
+          <p>Пара логин/пароль не подходит. Пожалуйста, попробуйте снова</p>
+        {% endif %}
+
+        {% if next %}
+          {% if user.is_authenticated %}
+            <p>Недостаточно прав для доступа к этой странице.
+            Пожалуйста, войдите в свой аккаунт</p>
+          {% else %}
+            <p>Пожалуйста, войдите в свой аккаунт.</p>
+          {% endif %}
+        {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <!-- <table class="table table-hover">
+            <tr>
+                <td></td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td class="login__title text-h1">{{ form.password1.label_tag }}</td>
+                <td class="login-form text-p">{{ form.password1 }}</td>
+            </tr>
+
+            <tr>
+                <td class="login__title text-h1">{{ form.password2.label_tag }}</td>
+                <td class="login-form text-p">{{ form.password2 }}</td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Регистрация" class="btn btn-primary"/>
+        <input type="hidden" name="next" value="{{ next }}"/> -->
+
+
+        <div class="login__container">
+            <h1 class="login__title text-h1">Регистрация</h1>
+            <div class="form-recovery">
+                <input class="login-form text-p" type="text" name="username" id="{{ form.username.auto_id }}" placeholder="Логин">
+                <input class="login-form text-p" type="password" name="password1" id="{{ form.password1.auto_id }}" placeholder="Пароль">
+                <input class="login-form text-p" type="password" name="password2" id="{{ form.password2.auto_id }}" placeholder="Повторите пароль">
+                <a class="recovery__btn text-p" href="{% url 'login' %}">Есть аккаунт?</a>
+            </div>
+    
+            <div class="login-sign">
+                <input class="signup__btn text-p" type="submit" value="Зарегистрироваться" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+

@@ -1,0 +1,77 @@
+{% include "base.html" with page_title='Курсы' %}
+{% block custom_css %}
+<style>
+    .filter__btn {
+        width: 13%;
+        height: 50%;
+        background-color: var(--blue-color);
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        padding: 7px 14px;
+
+        transition: background-color .2s linear;
+    }
+    .filter__btn:hover {
+        background-color: var(--grey-color);
+    }
+    .filter__title {
+        margin-right: 15px;
+        color: #000;
+    }
+    .filter__select {
+        margin-right: 45px;
+        padding: 7px 14px;
+        border-radius: 5px;
+        text-align: center;
+
+        border-color: var(--dark-color);
+        background-color: var(--light-color);
+    }
+    
+
+</style>
+{% endblock %}
+
+{% block container %}
+    <div class="container mt-4">
+        
+        {% load render_table from django_tables2 %}
+        {% if filter %}
+            {% load bootstrap3 %}
+            <form action="" method="get" class="filter__form">
+
+                <label class="filter__title text-h2" for="id_stock">Склад</label>
+                <select class="filter__select text-p" name="stock" title id="id_stock">
+                    <option value="">(Не выбрано)</option>
+                    {% for elem in filter_stock_data %}
+                        <option value="{{ elem.0 }}"
+                            {% if elem.0 == selected_stock %}
+                                selected=""
+                            {% endif %}
+                            >
+                            {{ elem.1 }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <label class="filter__title text-h2" for="id_type">Операция</label>
+                <select class="filter__select text-p" name="type" title id="id_stock">
+                    <option value="" selected="">(Не выбрано)</option>
+                    <option value="admission">Поступление</option>
+                    <option value="departure">Продажа</option>
+                    <option value="transfer">Передача</option>
+                    <option value="recalc">Переучет</option>
+                </select>
+                
+                <button class="filter__btn text-p">Фильтровать</button>
+
+            </form>
+        {% endif %}
+        
+        {% render_table table %}
+        {% if can_edit %}
+            <a href="{% url 'operation-create' %}" class="login__btn">Добавить операцию</a>
+        {% endif %}
+    </div>
+{% endblock %}

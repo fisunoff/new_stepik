@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block container %}
+    <div class="container mt-4 prof__cont">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="profile__subtitle text-h1">Профиль пользователя</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <!-- <dt class="col-sm-3">ФИО</dt>
+                    <dd class="col-sm-9">{{ profile.surname }} {{ profile.name }} {{ profile.patronymic|default_if_none:"" }}</dd>
+                    <dt class="col-sm-3">О себе</dt>
+                    <dd class="col-sm-9">{{ profile.bio|default_if_none:"&#10060" }}</dd>
+                    <dt class="col-sm-3">Сотрудник</dt>
+                    {% if is_profile_staff %}
+                        <dd class="col-sm-9">Да</dd>
+                    {% else %}
+                        <dd class="col-sm-9">Нет</dd>
+                    {% endif %}
+                    {% if profile.photo %}
+                        <dt class="col-sm-3">Фото</dt>
+                        <dd class="col-sm-9">
+                            <img src="{{ profile.photo.url }}" alt="Фото не загружено" height="200">
+                        </dd>
+                    {% endif %} -->
+                    <!-- {% if profile.id == user.profile.id or user.is_superuser %}
+                        <a href="{% url 'profile-update' profile.id %}" class="btn btn-primary">Редактировать</a>
+                    {% else %}
+                        <a class="btn btn-primary disabled">Редактировать</a>
+                    {% endif %}
+                    {% if profile.id == user.profile.id %}
+                        <a href="{% url 'logout' %}" class="btn btn-danger">Выйти</a>
+                        <a href="{% url 'password_change' %}" class="btn btn-warning">Смена пароля</a>
+                    {% endif %} -->
+                </dl>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="profile__container">
+      <div class="profile__flex">
+          {% if profile.photo %}
+            <img class="profile__img" src="{{ profile.photo.url }}" alt="Profile image">
+          {% endif %}
+          <div class="profile__left-flex">
+              <div class="profile__content">
+                  <div class="profile__subtitle text-p">Имя</div>
+                  <div class="profile__text text-h2">{{ profile.name|default_if_none:"Не указано" }}</div>
+              </div>
+              <div class="profile__content">
+                <div class="profile__subtitle text-p">Фамилия</div>
+                <div class="profile__text text-h2">{{ profile.surname|default_if_none:"Не указано" }}</div>
+            </div>
+              <div class="profile__content">
+                  <div class="profile__subtitle text-p">Отчество</div>
+                  <div class="profile__text text-h2">{{ profile.patronymic|default_if_none:"Не указано" }}</div>
+              </div>
+          </div>
+          <div class="profile__right-flex">
+              <div class="profile__content">
+                  <div class="profile__subtitle text-p">Контакты</div>
+                  <div class="profile__text text-h2">{{ profile.communication|default_if_none:"Не указано" }}</div>
+              </div>
+              <div class="profile__content">
+                  <div class="profile__subtitle text-p">Должность</div>
+                  <div class="profile__text text-h2">{{ profile.post|default_if_none:"Не указано" }}</div>
+              </div>
+          </div>
+          <div class="profile__btns">
+            {% if profile.id == user.profile.id or user.is_superuser %}
+            <a href="{% url 'profile-update' profile.id %}" class="profile__btn text-p">Редактировать</a>
+            {% endif %}
+            {% if profile.id == user.profile.id %}
+            <a href="{% url 'password_change' %}" class="profile__btn text-p">Смена пароля</a>
+{#            <a href="{% url 'logout' %}" class="profile__btn text-p">Выйти</a>#}
+            <form class="logout__form" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+                <button type="submit" class="profile__btn text-p">Выйти</button>
+            </form>
+            {% endif %}
+          </div>
+      </div>
+
+    </div>
+
+{% endblock %}
