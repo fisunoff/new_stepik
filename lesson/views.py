@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_tables2 import SingleTableView, SingleTableMixin
@@ -44,3 +44,13 @@ class CourseDetailView(SingleTableMixin, DetailView):
     def get_table_data(self):
         qs = Block.objects.filter(course=self.get_object())
         return qs
+
+
+class CourseDeleteView(CreateView):
+    model = Course
+    success_url = reverse_lazy('course-list')
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(self.get_success_url())
