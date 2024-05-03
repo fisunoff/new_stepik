@@ -1,0 +1,9 @@
+{% include "base.html" with page_title='Курсы' %}
+
+{% block container %}
+    <div class="container mt-4">
+        {% for tag in tags %}
+            {{ tag.0 }} - {{ tag.1 }} </br>
+        {% endfor %}
+    </div>
+{% endblock %}
