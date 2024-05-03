@@ -6,7 +6,9 @@
                 <div class="course-name text-h1">
                     {{ task.name }}
                 </div>
-                {{ task.description|linebreaks }}
+                <div class="task-text text-h2">
+                    {{ task.description|linebreaks }}
+                </div>
                 <div class="card">
 {#                <<div class="card-header">#}
 {#                    <h5 class="card-title-task">{{ title }}</h5>#}
@@ -118,9 +120,17 @@
         }
         .card-body-task {
             background: rgba(0, 0, 0, 0);
+            margin-top: 30px;
+        }
+        .card-body-task button {
+            width: 200px;
         }
         .mark {
             color: #5F6982;
+        }
+        .task-text {
+            margin-top: 50px;
+            margin-bottom: 50px;
         }
     </style>
 {% endblock %}
