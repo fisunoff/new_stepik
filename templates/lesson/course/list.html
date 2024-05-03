@@ -1,71 +1,23 @@
 {% include "base.html" with page_title='Курсы' %}
-<!-- {% block custom_css %}
-<style>
-    .filter__btn {
-        width: 13%;
-        height: 50%;
-        background-color: var(--blue-color);
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        padding: 7px 14px;
-
-        transition: background-color .2s linear;
-    }
-    .filter__btn:hover {
-        background-color: var(--grey-color);
-    }
-    .filter__title {
-        margin-right: 15px;
-        color: #000;
-    }
-    .filter__select {
-        margin-right: 45px;
-        padding: 7px 14px;
-        border-radius: 5px;
-        text-align: center;
-
-        border-color: var(--dark-color);
-        background-color: var(--light-color);
-    }
-    .add-button {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-bottom: 10px;
-        font-size: 16px;
-        color: white;
-        background-color: #007BFF;
-        text-align: center;
-        border-radius: 5px;
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
-    .add-button:hover {
-        background-color: #0056b3;
-    }
-</style>
-{% endblock %} -->
-
 
 {% block container %}
     <div class="container mt-4">
         <a href="{% url 'course-create' %}" class="add-button">Добавить курс</a>
-        {% load render_table from django_tables2 %}
-
-        {% render_table table %}
-        {% if can_edit %}
-            
-        {% endif %}
 
         <div class="courses__list">
             <div class="containter">
-                <a href="#" class="course__item">
+            {% for row in course_list %}
+                <a href="{% url 'course-detail' pk=row.id %}" class="course__item">
                     <div class="course__info">
-                        <img class="course__img" src="https://cdn.stepik.net/media/cache/images/courses/113714/cover_IgSEHwD/dd4fc60d221af004f8e5e9e64382c46d.png" alt="">                      
+                        {% if row.image %}
+                        <img class="course__img" src="{{ row.image.url }}" alt="">
+                        {% else %}
+                        <img class="course__img" src="https://cdn.stepik.net/media/cache/images/courses/113714/cover_IgSEHwD/dd4fc60d221af004f8e5e9e64382c46d.png" alt="">
+                        {% endif %}
                         <div class="course__name">
-                            <h3 class="course__title text-h2">Redux для управления состоянием React-приложений</h3>
-                            <p class="course__autor text-p">Михаил Степанов</p>
-                            <p class="course__desc text-p">Освойте принцип работы Redux — на классическом и современном вариантах использования. 2 проекта внутри.</p>    
+                            <h3 class="course__title text-h2">{{ row.name }}</h3>
+                            <p class="course__autor text-p">{{ row.author }}</p>
+                            <p class="course__desc text-p">{{ row.description|linebreaks }}</p>    
                         </div>
                         <div class="course-down-content">
                             <div class="review-icons">
@@ -88,71 +40,13 @@
                         </div> 
                     </div> 
                 </a>
-                <a href="#" class="course__item">
-                    <div class="course__info">
-                        <img class="course__img" src="https://cdn.stepik.net/media/cache/images/courses/121859/cover_ZvamaLN/3cc6022cb8a8574a7c11c7735c4edf67.png" alt="">                      
-                        <div class="course__name">
-                            <h3 class="course__title text-h2">TypeScript для современной разработки</h3>
-                            <p class="course__autor text-p">Антон Миронов</p>
-                            <p class="course__desc text-p">От базовых типов TypeScript до создания серьезных приложений на современном стеке. Три проекта внутри!</p>    
-                        </div>
-                        <div class="course-down-content">
-                            <div class="review-icons">
-                                        &#9733 &#9733 &#9733 &#9733 &#9733
-                            </div>
-                            <div class="course__time">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_401_427)">
-                                            <path d="M9.99935 1.6665C14.6018 1.6665 18.3327 5.39734 18.3327 9.99984C18.3327 14.6023 14.6018 18.3332 9.99935 18.3332C5.39685 18.3332 1.66602 14.6023 1.66602 9.99984C1.66602 5.39734 5.39685 1.6665 9.99935 1.6665ZM9.99935 3.33317C8.23124 3.33317 6.53555 4.03555 5.2853 5.28579C4.03506 6.53603 3.33268 8.23173 3.33268 9.99984C3.33268 11.7679 4.03506 13.4636 5.2853 14.7139C6.53555 15.9641 8.23124 16.6665 9.99935 16.6665C11.7675 16.6665 13.4632 15.9641 14.7134 14.7139C15.9636 13.4636 16.666 11.7679 16.666 9.99984C16.666 8.23173 15.9636 6.53603 14.7134 5.28579C13.4632 4.03555 11.7675 3.33317 9.99935 3.33317ZM9.99935 4.99984C10.2035 4.99986 10.4005 5.0748 10.553 5.21043C10.7055 5.34607 10.803 5.53296 10.8268 5.73567L10.8327 5.83317V9.65484L13.0885 11.9107C13.238 12.0606 13.3247 12.2619 13.3312 12.4735C13.3377 12.6851 13.2633 12.8913 13.1233 13.0501C12.9833 13.2089 12.7881 13.3084 12.5773 13.3285C12.3665 13.3486 12.156 13.2877 11.9885 13.1582L11.9102 13.089L9.41018 10.589C9.28066 10.4594 9.19748 10.2907 9.17352 10.109L9.16602 9.99984V5.83317C9.16602 5.61216 9.25381 5.4002 9.41009 5.24391C9.56637 5.08763 9.77834 4.99984 9.99935 4.99984Z" fill="#5F6982"/>
-                                            </g>
-                                            <defs>
-                                            <clipPath id="clip0_401_427">
-                                            <rect width="20" height="20" fill="white"/>
-                                            </clipPath>
-                                            </defs>
-                                            </svg>
-                                        <p class="text-p" style="color: var(--grey-color);">14ч</p>
-                            </div>
-                            <p class="course__btn header-link">Пройти курс</p>
-                        </div> 
-                    </div> 
-                </a>
-                <a href="#" class="course__item">
-                    <div class="course__info">
-                        <img class="course__img" src="https://cdn.stepik.net/media/cache/images/courses/102551/cover_W2ExA3W/aa87fc7e8e57e883c193302dcab256b9.jpg" alt="">                      
-                        <div class="course__name">
-                            <h3 class="course__title text-h2">React + Next.js 14 - с нуля. TypeScript, Hooks, SSR и CSS Grid</h3>
-                            <p class="course__autor text-p">Михаил Степанов</p>
-                            <p class="course__desc text-p">Next.js - готовый к production framework для React - самой популярной JavaScript 
-                                библиотеки на сегодняшний день. Он позволяет разрабатывать производительные, SEO-friendly сайты с использованием 
-                                Server Side Rendering (SSR) и статической генерацией страниц. 
-                                При этом от вас требуется только базовое знание CSS, HTML и JavaScript, так в рамках курса мы не только разберём 
-                                Next.js, но и React с нуля. При этом мы будем писать не просто какой-то учебный проект, а реальный production 
-                                сайт, посвящённый рейтингам.</p>    
-                        </div>
-                        <div class="course-down-content">
-                            <div class="review-icons">
-                                        &#9733 &#9733 &#9733 &#9733 &#9733
-                            </div>
-                            <div class="course__time">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_401_427)">
-                                            <path d="M9.99935 1.6665C14.6018 1.6665 18.3327 5.39734 18.3327 9.99984C18.3327 14.6023 14.6018 18.3332 9.99935 18.3332C5.39685 18.3332 1.66602 14.6023 1.66602 9.99984C1.66602 5.39734 5.39685 1.6665 9.99935 1.6665ZM9.99935 3.33317C8.23124 3.33317 6.53555 4.03555 5.2853 5.28579C4.03506 6.53603 3.33268 8.23173 3.33268 9.99984C3.33268 11.7679 4.03506 13.4636 5.2853 14.7139C6.53555 15.9641 8.23124 16.6665 9.99935 16.6665C11.7675 16.6665 13.4632 15.9641 14.7134 14.7139C15.9636 13.4636 16.666 11.7679 16.666 9.99984C16.666 8.23173 15.9636 6.53603 14.7134 5.28579C13.4632 4.03555 11.7675 3.33317 9.99935 3.33317ZM9.99935 4.99984C10.2035 4.99986 10.4005 5.0748 10.553 5.21043C10.7055 5.34607 10.803 5.53296 10.8268 5.73567L10.8327 5.83317V9.65484L13.0885 11.9107C13.238 12.0606 13.3247 12.2619 13.3312 12.4735C13.3377 12.6851 13.2633 12.8913 13.1233 13.0501C12.9833 13.2089 12.7881 13.3084 12.5773 13.3285C12.3665 13.3486 12.156 13.2877 11.9885 13.1582L11.9102 13.089L9.41018 10.589C9.28066 10.4594 9.19748 10.2907 9.17352 10.109L9.16602 9.99984V5.83317C9.16602 5.61216 9.25381 5.4002 9.41009 5.24391C9.56637 5.08763 9.77834 4.99984 9.99935 4.99984Z" fill="#5F6982"/>
-                                            </g>
-                                            <defs>
-                                            <clipPath id="clip0_401_427">
-                                            <rect width="20" height="20" fill="white"/>
-                                            </clipPath>
-                                            </defs>
-                                            </svg>
-                                        <p class="text-p" style="color: var(--grey-color);">23ч</p>
-                            </div>
-                            <p class="course__btn header-link">Пройти курс</p>
-                        </div> 
-                    </div> 
-                </a>
+            {% endfor %}
             </div>
         </div>
+        {% if can_edit %}
+            
+        {% endif %}
+
         
 
 

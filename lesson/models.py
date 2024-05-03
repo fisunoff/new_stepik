@@ -8,6 +8,7 @@ from utils.models import EditingModel, AuthoringModel
 class Course(EditingModel):
     name = models.CharField(max_length=1024, null=False, blank=False, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
+    image = models.ImageField(verbose_name='Обложка', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -19,6 +20,11 @@ class Course(EditingModel):
             res += f'{demand.name}: от {demand.percent}\n'
         res.strip('\n')
         return res
+
+    @property
+    def rating(self):
+        import random
+        return random.randint(1, 5)
 
 
 class Block(AuthoringModel):
