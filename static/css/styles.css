@@ -167,9 +167,6 @@ ul#slide-out:not(.browser-default) > li {
 .profile__flex {
     display: flex;
     flex-wrap: wrap;
-    /* padding-top: 30px;
-    padding-bottom: 10px;
-    padding-left: 30px; */
     padding: 30px 20px;
 }
 .profile__img {
@@ -192,10 +189,50 @@ ul#slide-out:not(.browser-default) > li {
 .profile__text {
     color: var(--dark-color);
 }
+
+.certificate {
+    padding: 0 20px;
+    margin-bottom: 16px;
+}
+.certificate__flex {
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    border: 1px solid;
+    border-color: var(--blue-color);
+    border-radius: 10px;
+}
+.certificate__img {
+    margin-right: 16px;
+}
+.certificate__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.certificate__name {
+    display: flex;
+    flex-direction: column;
+}
+.certificate__title {
+    margin-bottom: 16px;
+}
+.certificate__desc {
+}
+.arrow__down {
+}
+
+
+
+
+
 .profile__btns {
     display: flex;
     justify-content: space-between;
     width: 30%;
+    padding: 30px 20px;
 }
 .profile__btn {
     order: 1;
