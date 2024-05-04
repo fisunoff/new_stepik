@@ -59,7 +59,7 @@
                         </svg>                        
                     <div class="text-h3" style="color: #e7f5ff9e; margin-left: 8px;">Сертификат Employee Training</div>
                 </div>
-                <a href="{% url 'course-register' object.id %}" class="profile__btn well__btn text-p">Регистрация</a>
+                <a href="{% url 'course-register' object.id %}" class="profile__btn well__btn text-p well__title1">Регистрация</a>
             </div> 
             <video width="400" height="300" controls="controls" src="https://www.youtube.com/watch?v=LoYbN6qoQHA"></video>
         </div>
@@ -67,7 +67,7 @@
 
 </section>
 <section class="well__content">
-    <div class="container">
+    <div class="container unique-container">
         <div class="well__title2 text-hight">О курсе</div>
         <div class="well__text text-p">Курс обновлён до Next 14 и App Router!
             Next.js - готовый к production framework для React - самой популярной JavaScript библиотеки на сегодняшний день. 
@@ -103,10 +103,12 @@
         <div class="well__title2 text-hight">Для кого этот курс</div>
         <div class="well__text text-p">Начинающие frontend разработчики, Те, кто хочет сменить framework и попробовать React или познакомится с NextJS, Backend разработчики, которые хотят развиваться во frontend
         </div>
-        <div class="well__title2 text-hight">Начальные требования</div>
+        <div class="well__title2 text-hight well__title3">Начальные требования</div>
         <div class="well__text text-p">Знание основ JavaScript, CSS и HTML
         </div>
         <a href="{% url 'course-register' object.id %}" class="profile__btn well__btn text-p">Регистрация</a>
+
+        
 
         <section class="course-questions">
             <h2 class="text-h2">Добавление вопросов</h2>
@@ -123,11 +125,39 @@
     </div>
 
     
-   
+    <div class="course-info-modal">
+        <div class="course-info-modal-container">
+            <h2 class="text-h2">Информация о курсе</h2>
+            <p class="text-p text-highlighted">Уроков: 176</p>
+            <p class="text-p text-highlighted">Видео: 22 часа 8 минут</p>
+            <p class="text-p text-highlighted">Количество участников: 15</p>
+        </div>
+        <button class="scroll-to-about text-p">О курсе</button>
+        <button class="scroll-to-requirements text-p">Начальные требования</button>
+      </div>
     
 </section>
 
+
 <script>
+
+function scrollToElement(className) {
+  const element = document.querySelector('.' + className);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Добавление обработчиков событий для кнопок модального окна
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('.scroll-to-about').addEventListener('click', function() {
+    scrollToElement('well__title1');
+  });
+
+  document.querySelector('.scroll-to-requirements').addEventListener('click', function() {
+    scrollToElement('well__title3');
+  });
+});
     // Массив для хранения вопросов
 let questions = [];
 

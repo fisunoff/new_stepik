@@ -50,6 +50,55 @@
 .li-elem {
     margin-bottom: 12px;
 }
+.unique-container {
+    width: 65%; /* или любая другая ширина */
+    margin-right: auto;
+    margin-left: 11%;
+  }
+
+.course-info-modal {
+    position: fixed;
+    right: 10px; /* Расстояние от правого края */
+    bottom: 10px; /* Расстояние от нижнего края */
+    width: 300px; /* Ширина окна */
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    z-index: 1000;
+    border-radius: 10px;
+  }
+  .course-info-modal-container {
+    padding: 20px;
+    padding-bottom: 0;
+  }
+
+  .course-info-modal h2 {
+    margin-top: 0;
+    color: var(--blue-color);
+  }
+
+  .course-info-modal button {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    background-color: var(--white-color);
+    color: var(--blue-color);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+
+    transition: background-color .2s linear;
+  }
+
+  .course-info-modal button:hover {
+    background-color: var(--light-color);
+  }
+  .text-highlighted {
+    color: var(--grey-color);
+  }
+  .course-info-modal p {
+    margin: 10px 0;
+  }
 
 
 
