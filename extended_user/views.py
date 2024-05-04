@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_tables2 import SingleTableView
 
+from certificate.models import GeneratedDocument
 from extended_user.models import Profile
 from extended_user.tables import UserTable
 
@@ -35,9 +36,11 @@ class UserDetailView(DetailView):
             profile_user = User.objects.get(pk=context['object'].id)
             context['is_profile_staff'] = profile_user.groups.filter(name__in=['worker', ]).exists()
             context['is_staff'] = user.groups.filter(name__in=['worker', ]).exists()
+            context['certificates'] = GeneratedDocument.objects.filter(author=user.profile)
         else:
             context['is_profile_staff'] = False
             context['is_staff'] = False
+            context['certificates'] = []
 
         return context
 

@@ -1,4 +1,5 @@
 from django.http import HttpResponse, FileResponse
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView
 from django_tables2 import SingleTableView, SingleTableMixin
@@ -63,3 +64,11 @@ def update_certificate(request, course_pk):
             doc = GeneratedDocument.objects.get(pk=new_doc.id)
             return FileResponse(doc.document, as_attachment=True, filename=doc.document.name)
     return HttpResponse(status=400)
+
+
+def download_document(request, pk):
+    document = get_object_or_404(GeneratedDocument, pk=pk)
+    if document.document:
+        return FileResponse(document.document, as_attachment=True, filename=document.document.name)
+    else:
+        return HttpResponse("Файл сертификата не найден", status=404)
