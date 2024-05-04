@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.http import HttpResponse, FileResponse
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView
 from django_tables2 import SingleTableView, SingleTableMixin
@@ -60,4 +60,6 @@ def update_certificate(request, course_pk):
             )
             gen_document(new_doc.id)
             GeneratedDocument.objects.filter(author=profile, demand__course=course).exclude(pk=new_doc.pk).delete()
-    raise NotImplemented('Что вернуть?')
+            doc = GeneratedDocument.objects.get(pk=new_doc.id)
+            return FileResponse(doc.document, as_attachment=True, filename=doc.document.name)
+    return HttpResponse(status=400)
