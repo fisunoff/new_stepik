@@ -326,7 +326,7 @@ textarea, select {
 }
 
 .label-text {
-    margin-left: 50px;
+    /* margin-left: 50px; */
     margin-bottom: 10px;
     color: var(--blue-color);
     font-family: 'Ubuntu', sans-serif;
@@ -337,7 +337,7 @@ textarea, select {
 }
 
 .label-btn input[type="password" i] {
-    background-color: var(--blue-color);
+    background-color: var(--light-color);
     display: block;
     width: 100%;
     margin-top: 10px;
@@ -345,11 +345,14 @@ textarea, select {
     padding: 10px;
     font-family: "Ubuntu", sans-serif;
     font-size: 16px;
-    color: #FFF;
-    border: none;
+    color: var(--dark-color);
     border-radius: 10px;
+    border-color: var(--dark-color);
 }
-
+.btn-warning {
+    margin-top: 32px;
+    width: 20%;
+}
 
 /* страница с шагами */
 .container1 {
