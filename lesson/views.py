@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_tables2 import SingleTableView, SingleTableMixin
 
-from lesson.forms import AnswerForm, AnswerUpdateForm, TaskForm, CourseForm
+from lesson.forms import AnswerForm, AnswerUpdateForm, TaskForm, CourseForm, TaskUpdateForm
 from lesson.models import Course, Block, CourseRegister, Task, Answer
 from lesson.tables import CourseTable, BlockTable
 
@@ -153,6 +153,12 @@ class TaskCreateView(CreateView):
         kwargs['block'] = self.block
         kwargs['profile'] = self.request.user.profile
         return kwargs
+
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    form_class = TaskUpdateForm
+    template_name = 'base_create.html'
 
 
 class AnswerCreateView(CreateView):
