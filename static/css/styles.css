@@ -360,4 +360,15 @@ textarea, select {
     justify-content: space-between;
     align-items: center;
 }
+.certificate-download {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    
+}
+.download-text {
+    padding-right: 16px;
+    color: var(--grey-color);
+}
+
 
