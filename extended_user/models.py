@@ -36,7 +36,7 @@ class Profile(TimestampedModel):
 
     @property
     def course_count(self):
-        return 10
+        return len(self.generateddocument_by_author.all())
 
     class Meta:
         verbose_name = "Пользователь"
