@@ -120,6 +120,7 @@ ul#slide-out:not(.browser-default) > li {
     justify-content: space-between;
     align-items: center;
     margin: 0;
+    padding: 0;
 }
 .header-link__items {
     display: flex;
@@ -136,7 +137,9 @@ ul#slide-out:not(.browser-default) > li {
 .header-link:hover {
     color: var(--blue-color);
 }
-
+.header-link-last {
+    margin-right: 0;
+}
 .header__alert{
     width: 32px;
     height: 32px;
