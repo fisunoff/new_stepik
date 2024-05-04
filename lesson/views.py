@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_tables2 import SingleTableView, SingleTableMixin
 
-from lesson.forms import AnswerForm, AnswerUpdateForm
+from lesson.forms import AnswerForm, AnswerUpdateForm, TaskForm
 from lesson.models import Course, Block, CourseRegister, Task, Answer
 from lesson.tables import CourseTable, BlockTable
 
@@ -129,7 +129,25 @@ class CourseRegistrationView(CreateView):
 class TaskCreateView(CreateView):
     model = Task
     template_name = 'base_create.html'
-    fields = ('name', 'description', 'type', 'correct_answer')
+    form_class = TaskForm
+
+    def get(self, request, from_pk, *args, **kwargs):
+        self.block = get_object_or_404(Block, pk=from_pk)
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, from_pk, *args, **kwargs):
+        self.block = get_object_or_404(Block, pk=from_pk)
+        return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        task = Block.objects.get(pk=self.kwargs['from_pk']).task_set.first()
+        return reverse_lazy('answer-create', kwargs={'from_pk': task.pk})
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super().get_form_kwargs(**kwargs)
+        kwargs['block'] = self.block
+        kwargs['profile'] = self.request.user.profile
+        return kwargs
 
 
 class AnswerCreateView(CreateView):

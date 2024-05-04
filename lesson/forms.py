@@ -1,7 +1,7 @@
 from django import forms
 
 from lesson import const
-from lesson.models import Answer
+from lesson.models import Answer, Task
 
 
 class AnswerForm(forms.ModelForm):
@@ -35,4 +35,20 @@ class AnswerUpdateForm(forms.ModelForm):
 
     def save(self, commit=True):
         self.instance.status = const.DONE
+        super().save(commit)
+
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('name', 'description', 'type', 'correct_answer', 'max_mark')
+
+    def __init__(self, profile, block, *args, **kwargs):
+        self.profile = profile
+        self.block = block
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        self.instance.author = self.profile
+        self.instance.block = self.block
         super().save(commit)

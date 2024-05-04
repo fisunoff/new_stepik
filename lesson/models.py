@@ -125,7 +125,14 @@ class CourseRegister(TimestampedModel):
 
     @property
     def mark(self):
-        return sum(i.mark or 0 for i in Answer.objects.filter(task__block__course=self.course, author=self.profile)) or 0
+        marks = {}
+        for task, mark in Answer.objects.filter(task__block__course=self.course, author=self.profile).values_list('task_id', 'mark'):
+            if mark:
+                if task in marks:
+                    marks[task] = max(marks[task], mark)
+                else:
+                    marks[task] = mark
+        return sum(marks.values())
 
     @property
     def percent(self):

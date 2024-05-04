@@ -50,7 +50,9 @@
                     </li>
                 {% endfor %}
                 <li class="list-group-item">
-                    <a href=""> Добавить </a>
+                    {% if can_edit %}
+                        <a href="{% url 'task-create' from_pk=task.block_id %}"> Добавить </a>
+                    {% endif %}
                 </li>
             </ol>
         </div>
