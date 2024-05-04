@@ -267,7 +267,7 @@ body {
     background: var(--light-color);
 }
 
-.card-body form p input {
+.card-body form p input, select {
     background-color: var(--blue-color);
     display: block;
     width: 40%;
@@ -301,7 +301,7 @@ label {
     line-height: 18px;
 }
 
-textarea {
+textarea, select {
     background-color: var(--blue-color);
     display: block;
     width: 40%;
@@ -354,3 +354,4 @@ textarea {
     justify-content: space-between;
     align-items: center;
 }
+
