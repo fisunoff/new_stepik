@@ -160,6 +160,9 @@ class TaskUpdateView(UpdateView):
     form_class = TaskUpdateForm
     template_name = 'base_create.html'
 
+    def get_success_url(self):
+        return reverse_lazy('answer-create', kwargs={'from_pk': self.object.pk})
+
 
 class AnswerCreateView(CreateView):
     model = Answer

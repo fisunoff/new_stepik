@@ -39,11 +39,7 @@
                     {% csrf_token %}
                     {{form.as_p}}
                     <button type="submit" class="btn btn-success">
-                        {% if editing %}
-                            Сохранить
-                        {% else %}
-                            Создать
-                        {% endif %}
+                        Сохранить
                     </button>
                 </form>
             </div>
