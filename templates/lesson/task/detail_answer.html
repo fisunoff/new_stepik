@@ -49,12 +49,11 @@
                         <a href="{% url 'answer-create' from_pk=row.pk %}"> {{ row.name }} </a>
                     </li>
                 {% endfor %}
-                <li class="list-group-item">
-                    {% if can_edit %}
-                        <a href="{% url 'task-create' from_pk=task.block_id %}"> Добавить </a>
-                    {% endif %}
-                </li>
+                
             </ol>
+                {% if can_edit %}
+                    <a href="{% url 'task-create' from_pk=task.block_id %}" class="profile__btn text-p add-b"> Добавить </a>
+                {% endif %}
         </div>
         </div>
     </div>
@@ -151,6 +150,10 @@
         .task-text {
             margin-top: 50px;
             margin-bottom: 50px;
+        }
+        .add-b {
+            margin-top: 50px;
+            background: var(--dark-color);
         }
     </style>
 {% endblock %}
