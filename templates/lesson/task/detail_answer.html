@@ -6,6 +6,9 @@
                 <div class="course-name text-h1">
                     {{ task.name }}
                 </div>
+                {% if can_edit %}
+                <a href="{% url 'task-update' pk=task.pk %}">Редактировать</a>
+                {% endif %}
                 <div class="task-text text-h2">
                     {{ task.description|safe }}
                 </div>

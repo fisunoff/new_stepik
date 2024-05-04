@@ -69,3 +69,9 @@ class TaskForm(forms.ModelForm):
         self.instance.author = self.profile
         self.instance.block = self.block
         super().save(commit)
+
+
+class TaskUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('name', 'description', 'autotest', 'correct_answer', 'max_mark')
