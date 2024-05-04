@@ -83,7 +83,7 @@ class CompanyNameTag(Tag):
     description = 'Наименование компании'
 
     def get_data(self):
-        return 'ООО @Рога и копыта'
+        return 'ООО "ИСЕРВ"'
 
 
 class CertNumberTag(Tag):

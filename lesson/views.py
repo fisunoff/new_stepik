@@ -92,11 +92,16 @@ class CourseDetailView(SingleTableMixin, DetailView):
         kwargs = super().get_context_data(**kwargs)
         kwargs['registered'] = CourseRegister.objects.filter(course=self.get_object(),
                                                              profile=self.request.user.profile).exists()
+        kwargs['can_get_cert'] = False
         if kwargs['registered']:
             reg = CourseRegister.objects.get(course=self.get_object(), profile=self.request.user.profile)
             kwargs['mark'] = reg.mark
             kwargs['percent'] = reg.percent
             kwargs['can_change'] = self.object.can_edit(self.request.user.profile)
+            demands = self.object.demand_set.order_by('percent')
+            if demands.exists():
+                if demands.first().percent <= reg.percent:
+                    kwargs['can_get_cert'] = True
         else:
             kwargs['mark'] = 0
             kwargs['percent'] = 0

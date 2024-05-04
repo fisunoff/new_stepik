@@ -17,7 +17,11 @@
             <tbody>
                 <tr>
                     <td>{{ object.name }}</td>
-                    <td>{{ object.demands_str|linebreaks }}</td>
+                    <td>{{ object.demands_str|linebreaks }}
+                    {% if can_get_cert %}
+                        <a href="{% url 'update_certificate' course_pk=object.pk %}">Заказать сертификат</a>
+                    {% endif %}
+                    </td>
                     <td>
                         {% if registered %}
                             Да
