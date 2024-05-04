@@ -58,7 +58,7 @@ class AnswerUpdateForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('name', 'description', 'type', 'correct_answer', 'max_mark')
+        fields = ('name', 'description', 'autotest', 'correct_answer', 'max_mark')
 
     def __init__(self, profile, block, *args, **kwargs):
         self.profile = profile

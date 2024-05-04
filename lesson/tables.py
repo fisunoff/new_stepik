@@ -32,7 +32,13 @@ class CourseTable(tables.Table):
 class BlockTable(tables.Table):
     actions = tables.TemplateColumn(
         '''
-        <a href="{% url 'answer-create' record.id %}">&#128203;</a>
+        {% if record.first_elem %}
+        <a href="{% url 'answer-create' record.first_elem.id %}">&#128203;</a>
+        {% else %}
+            {% if user.is_superuser or record.user_can_edit %}
+            <a href="{% url 'task-create' from_pk=record.id %}" class="profile__btn text-p add-b">Добавить 1 шаг</a>
+            {% endif %}
+        {% endif %}
        {% if user.is_superuser or record.user_can_edit %}
         <a href="{% url 'block-update' record.id %}">&#9997;</a>
         {% endif %}

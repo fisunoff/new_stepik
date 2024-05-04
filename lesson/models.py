@@ -47,6 +47,10 @@ class Block(AuthoringModel):
     def can_edit(self, profile) -> bool:
         return self.course.can_edit(profile)
 
+    @property
+    def first_elem(self):
+        return self.task_set.first() or None
+
 
 class Task(AuthoringModel):
     '''
