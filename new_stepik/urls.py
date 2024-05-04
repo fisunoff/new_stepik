@@ -23,6 +23,7 @@ from extended_user.views import ProfileDetailView, SignUp
 from new_stepik import settings
 
 urlpatterns = [
+    path('', include('lesson.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('users/', include('extended_user.urls')),

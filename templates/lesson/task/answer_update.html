@@ -1,23 +1,54 @@
 {% extends "base.html" %}
 {% block container %}
     <div class="container mt-4">
-        <div class="card">
+        <div class="card profile__container profile__flex">
             <div class="card-header">
                 <h5 class="card-title">{{ title }}</h5>
             </div>
             <div class="card-body">
-                <div>Задание: {{ object.task.name }}<br>
-                {{ object.task.description|linebreaks }}</div>
-                <div>Автор решения: {{ object.author }}</div>
-                <div>Ответ: {{ object.answer }}</div>
-                <form method="post" enctype="multipart/form-data">
+                <div class="info-card">
+                    <div class="profile__subtitle">Задание: {{ object.task.name }}
+                        <div class="text-p">
+                            {{ object.task.description|linebreaks }}
+                        </div>
+                    </div>
+                    <div class="profile__subtitle">Автор решения: 
+                        <div class="text-p">
+                            {{ object.author }}
+                        </div>
+                    </div>
+                    <div class="profile__subtitle">Ответ: 
+                        <div class="text-p"> 
+                            {{ object.answer }}
+                        </div></div>
+                </div>
+                <form method="post" enctype="multipart/form-data" class="form_marks">
                     {% csrf_token %}
                     {{form.as_p}}
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn1 profile__btn text-p ">
                         Оценить
                     </button>
                 </form>
             </div>
         </div>
     </div>
+    
+    <style>
+        .card-body {
+            display: flex;
+            background: rgba(0, 0, 0, 0);
+        }
+        .info-card {
+            margin-right: 100px;
+        }
+        .btn1 {
+            margin-top: 20px;
+            width: 40%;
+        }
+        .form_marks {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+        }
+    </style>
 {% endblock %}

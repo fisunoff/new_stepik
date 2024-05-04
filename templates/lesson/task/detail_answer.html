@@ -16,7 +16,7 @@
                 <div class="card-body-task">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{form.as_p}}
+                        {{form.answer}}
                         <button type="submit" class="btn profile__btn text-p">
                             Отправить ответ
                         </button>
@@ -49,7 +49,7 @@
                         <a href="{% url 'answer-create' from_pk=row.pk %}"> {{ row.name }} </a>
                     </li>
                 {% endfor %}
-                
+
             </ol>
                 {% if can_edit %}
                     <a href="{% url 'task-create' from_pk=task.block_id %}" class="profile__btn text-p add-b"> Добавить </a>
@@ -62,12 +62,14 @@
             display: flex;
             justify-content: space-between;
         }
-
+        .course-name {
+            margin-bottom: 8px;
+        }
 
         .list-group {
             counter-reset: li;
             list-style: none;
-            font: 20px "Trebuchet MS", "Lucida Sans";
+            font: 20px "Ubuntu",sans-serif;
             padding: 0;
         }
 
@@ -85,7 +87,7 @@
         }
 
         .list-group a:hover {
-            background: var(--light-color);
+            background: var(--dark-color);
         }
         
         .list-group .active-item a:before  {
@@ -99,7 +101,7 @@
             left: -2.5em;
             top: 50%;
             margin-top: -1em;
-            background: var(--blue-color);
+            background: var(--grey-color);
             height: 2em;
             width: 2em;
             line-height: 2em;
@@ -140,19 +142,21 @@
             background: rgba(0, 0, 0, 0);
             border: #007BFF 1px solid;
             color: var(--dark-color);
+            width: 100%;
         }
         .card-body-task button {
             width: 200px;
         }
         .mark {
             color: #5F6982;
+            margin-bottom: 12px;
         }
         .task-text {
-            margin-top: 50px;
-            margin-bottom: 50px;
+            {#margin-top: 50px;#}
+            {#margin-bottom: 50px;#}
         }
         .add-b {
-            margin-top: 50px;
+            margin-top: 100px;
             background: var(--dark-color);
         }
     </style>
