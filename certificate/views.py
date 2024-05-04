@@ -34,6 +34,8 @@ class DemandCreateView(CreateView):
         return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
+        self.object.course_id = self.pk
+        self.object.save()
         return reverse_lazy('demand-list', kwargs={'pk': self.pk})
 
 

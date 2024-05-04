@@ -48,7 +48,7 @@
 
 {% block container %}
     <div class="container mt-4">
-{#        <a href="{% url 'demand-create' %}" class="add-button">Добавить вариант сертификата</a>#}
+        <a href="{% url 'demand-create' pk=object.pk %}" class="add-button">Добавить вариант сертификата</a>
         {% load render_table from django_tables2 %}
 
         {% render_table table %}

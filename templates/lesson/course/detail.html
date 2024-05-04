@@ -21,6 +21,9 @@
                     {% if can_get_cert %}
                         <a href="{% url 'update_certificate' course_pk=object.pk %}">Заказать сертификат</a>
                     {% endif %}
+                    {% if can_change %}
+                        <br><a href="{% url 'demand-list' pk=object.pk %}">Управление сертификатами</a>
+                    {% endif %}
                     </td>
                     <td>
                         {% if registered %}
