@@ -36,7 +36,11 @@
     </div>
 
 
-    
+    {% if can_change %}
+        <div class="create-icons">
+            <a href="{% url 'block-create' from_pk=object.pk %}" class="add-button">Добавить блок</a>
+        </div>
+    {% endif %}
     {% load django_tables2 %}
     {% render_table table %}
 {#        {% if can_edit %}#}

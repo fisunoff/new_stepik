@@ -96,9 +96,11 @@ class CourseDetailView(SingleTableMixin, DetailView):
             reg = CourseRegister.objects.get(course=self.get_object(), profile=self.request.user.profile)
             kwargs['mark'] = reg.mark
             kwargs['percent'] = reg.percent
+            kwargs['can_change'] = self.object.can_edit(self.request.user.profile)
         else:
             kwargs['mark'] = 0
             kwargs['percent'] = 0
+            kwargs['can_change'] = False
         return kwargs
 
 
@@ -191,3 +193,59 @@ class AnswerUpdateView(UpdateView):
     def get_success_url(self):
         answer = Answer.objects.get(pk=self.kwargs['pk'])
         return reverse_lazy('answer-create', kwargs={'from_pk': answer.task.pk})
+
+
+class BlockCreateView(CreateView):
+    model = Block
+    template_name = 'base_create.html'
+    fields = ('name', 'description')
+
+    def get(self, request, from_pk, *args, **kwargs):
+        self.course = get_object_or_404(Course, pk=from_pk)
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, from_pk, *args, **kwargs):
+        self.course = get_object_or_404(Course, pk=from_pk)
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Перемещаем проверку профиля на первое место
+        user_profile = getattr(self.request.user, 'profile', None)
+        if not user_profile:
+            form.add_error(None, 'Ошибка: у пользователя нет профиля. Необходим профиль для создания курса.')
+            return self.form_invalid(form)
+        if not self.course.can_edit(user_profile):
+            form.add_error(None, 'Ошибка: Недостаточно прав')
+            return self.form_invalid(form)
+
+        self.object = form.save(commit=False)
+        self.object.course = self.course
+        self.object.author = user_profile
+        self.object.save()
+        form.save_m2m()  # Сохраняем связанные данные ManyToMany, если есть
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse_lazy('course-detail', kwargs=dict(pk=self.course.pk))
+
+
+class BlockUpdateView(UpdateView):
+    model = Block
+    template_name = 'base_create.html'
+    fields = ('name', 'description')
+
+    def form_valid(self, form):
+        # Перемещаем проверку профиля на первое место
+        user_profile = getattr(self.request.user, 'profile', None)
+        if not user_profile:
+            form.add_error(None, 'Ошибка: у пользователя нет профиля. Необходим профиль для создания курса.')
+            return self.form_invalid(form)
+        if not self.object.course.can_edit(user_profile):
+            form.add_error(None, 'Ошибка: Недостаточно прав')
+            return self.form_invalid(form)
+
+        self.object = form.save(commit=False)
+        self.object.last_editor = user_profile
+        self.object.save()
+        form.save_m2m()  # Сохраняем связанные данные ManyToMany, если есть
+        return HttpResponseRedirect(self.get_success_url())

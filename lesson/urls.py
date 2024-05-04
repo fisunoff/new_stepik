@@ -13,4 +13,6 @@ urlpatterns = [
     path('<int:pk>/register/', CourseRegistrationView.as_view(), name='course-register'),
     path('answer/create/<int:from_pk>/', AnswerCreateView.as_view(), name='answer-create'),
     path('answer/update/<int:pk>/', AnswerUpdateView.as_view(), name='answer-update'),
+    path('block/create/<int:from_pk>/', BlockCreateView.as_view(), name='block-create'),
+    path('block/update/<int:pk>/', BlockUpdateView.as_view(), name='block-update'),
 ]

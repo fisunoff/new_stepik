@@ -34,7 +34,7 @@ class BlockTable(tables.Table):
         '''
         <a href="{% url 'answer-create' record.id %}">&#128203;</a>
        {% if user.is_superuser or record.user_can_edit %}
-        <a href="{% url 'answer-update' record.id %}">&#9997;</a>
+        <a href="{% url 'block-update' record.id %}">&#9997;</a>
         {% endif %}
         ''',
         orderable=False, verbose_name="Действия"
