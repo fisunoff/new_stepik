@@ -1,7 +1,24 @@
 from django import forms
-
 from lesson import const
-from lesson.models import Answer, Task
+from lesson.models import Answer, Task, Course
+from ckeditor.widgets import CKEditorWidget
+
+
+class CourseForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget(), label="Описание")
+
+    class Meta:
+        model = Course
+        fields = ['name', 'description', 'image']
+        labels = {
+            'name': 'Название курса',
+            'image': 'Изображение курса'
+        }
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control-file'}),
+        }
 
 
 class AnswerForm(forms.ModelForm):

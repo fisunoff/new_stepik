@@ -80,7 +80,9 @@
                         <div class="course__name">
                             <h3 class="course__title text-h2">{{ row.name }}</h3>
                             <p class="course__autor text-p">{{ row.author }}</p>
-                            <p class="course__desc text-p">{{ row.description|linebreaks }}</p>
+                            {% autoescape off %}
+                                <p class="course__desc text-p">Продолжение следует...</p>
+                            {% endautoescape on %}
                         </div>
 
                         <div class="course-down-content">

@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_tables2 import SingleTableView, SingleTableMixin
 
-from lesson.forms import AnswerForm, AnswerUpdateForm, TaskForm
+from lesson.forms import AnswerForm, AnswerUpdateForm, TaskForm, CourseForm
 from lesson.models import Course, Block, CourseRegister, Task, Answer
 from lesson.tables import CourseTable, BlockTable
 
@@ -72,12 +72,10 @@ class CourseCreateView(CreateView):
 
 class CourseUpdateView(UpdateView):
     model = Course
+    form_class = CourseForm
     template_name = 'base_create.html'
-    fields = ('name', 'description', 'image')
 
     def get_success_url(self):
-        # self.object.time_edit = timezone.now()
-        # self.object.save()
         return reverse_lazy('course-list')
 
 

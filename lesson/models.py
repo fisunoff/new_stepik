@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 
 from lesson import const
@@ -7,7 +8,7 @@ from utils.models import EditingModel, AuthoringModel, TimestampedModel
 # Create your models here.
 class Course(EditingModel):
     name = models.CharField(max_length=1024, null=False, blank=False, verbose_name='Наименование')
-    description = models.TextField(verbose_name='Описание')
+    description = RichTextField(verbose_name='Описание')
     image = models.ImageField(verbose_name='Обложка', blank=True, null=True)
 
     def __str__(self):
