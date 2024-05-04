@@ -1,0 +1,21 @@
+version: '3.8' # лучше указать версию new https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a6a8ae918b5
+services:
+  db:
+    container_name: postgresql_container
+    image: postgres:14.3-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_HOSTNAME = my_hostname
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
+
+
+
