@@ -8,7 +8,7 @@ from utils.models import AuthoringModel
 
 # Create your models here.
 class Demand(AuthoringModel):
-    name = models.CharField(max_length=255, )
+    name = models.CharField(max_length=255, verbose_name='Наименование')
     course = models.ForeignKey('lesson.Course', on_delete=models.CASCADE, verbose_name='Курс', null=True)
     # qualification = будет позже
     percent = models.IntegerField(verbose_name='Требуемое количество процентов')
